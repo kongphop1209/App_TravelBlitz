@@ -32,11 +32,13 @@ class MyApp extends StatelessWidget {
       builder: (context, _) => MaterialApp(
         initialRoute: '/login', // Set the initial route to '/login'
         routes: {
-          '/login': (context) => LoginPage(),
-          '/home': (context) => HomePage(), // Define the route for '/home'
-          '/register': (context) => RegisterPage(),
+          '/login': (context) => const LoginPage(),
+          '/main': (context) => const MainPage(),
+          '/home': (context) =>
+              const HomePage(), // Define the route for '/home'
+          '/register': (context) => const RegisterPage(),
         },
-        home: LoginPage(),
+        home: const LoginPage(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
       ),

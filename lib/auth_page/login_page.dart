@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       print("User is sucessfully SignIn");
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushNamed(context, "/main");
     } else
       print("Some error happend");
   }

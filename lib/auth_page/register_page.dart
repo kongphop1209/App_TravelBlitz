@@ -161,12 +161,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // Validate email format
     if (!_isEmailValid(email)) {
-      // Show an error message to the user indicating that the email address is invalid
       print("Invalid email address");
       return;
     }
 
-    // Sign up with email and password
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -174,23 +172,15 @@ class _RegisterPageState extends State<RegisterPage> {
         password: password,
       );
 
-      // If sign-up is successful, print a success message and navigate to the home screen
       if (userCredential.user != null) {
         print("User is successfully created");
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushNamed(context, "/main");
       }
     } catch (e) {
-      // If an error occurs during sign-up, print the error message
       print("Error occurred during sign-up: $e");
-      // You can also provide more specific error messages based on the error code
-      // For example, if the error code is 'email-already-in-use', you can show a message like:
-      // if (e.code == 'email-already-in-use') {
-      //   print('The account already exists for that email.');
-      // }
     }
   }
 
-// Email validation function
   bool _isEmailValid(String email) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
