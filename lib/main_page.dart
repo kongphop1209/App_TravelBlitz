@@ -17,9 +17,11 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   void navigateBottomBar(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(
+      () {
+        _selectedIndex = index;
+      },
+    );
   }
 
   final List<Widget> _pages = [
