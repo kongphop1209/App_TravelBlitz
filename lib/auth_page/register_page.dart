@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/main_page.dart';
-import 'package:traveling_app/services/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             SizedBox(height: 10.h),
                             GestureDetector(
-                              onTap: _signUp,
+                              onTap: _register,
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -154,12 +154,11 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _signUp() async {
+  void _register() async {
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    // Validate email format
     if (!_isEmailValid(email)) {
       print("Invalid email address");
       return;
