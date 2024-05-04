@@ -195,4 +195,18 @@ class _RegisterPageState extends State<RegisterPage> {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
   }
+
+  //   void _signUn() async {
+  //   String username = _usernameController.text;
+  //   String email = _emailController.text;
+  //   String password = _passwordController.text;
+
+  //   User? user = await _auth.signUnWithEmailAndPassword(email, password);
+
+  //   if (user != null) {
+  //     print("User is sucessfully Created");
+  //     Navigator.pushNamed(context, "/home");
+  //   } else
+  //     print("Some error happend");
+  // }
 }
