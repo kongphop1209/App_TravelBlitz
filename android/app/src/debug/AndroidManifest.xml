@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- other manifest declarations -->
+
+    <!-- <uses-sdk android:minSdkVersion="19" tools:overrideLibrary="com.google.firebase.auth" /> -->
+
+    <!-- other manifest declarations -->
+
+</manifest>
