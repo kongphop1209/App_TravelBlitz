@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (userCredential.user != null) {
-        print("User is successfully Signin");
+        print("User is successfully SignIn");
         Navigator.pushNamed(context, "/main");
       }
     } catch (e) {
