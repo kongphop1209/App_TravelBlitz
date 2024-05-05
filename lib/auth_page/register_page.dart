@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
+
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  bool isSigningUp = false;
 
   @override
   void dispose() {
@@ -172,7 +176,8 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
       if (userCredential.user != null) {
-        print("User is successfully created");
+        print("User is successfully Created");
+        await _createUserProfile(userCredential.user!.uid, username, email);
         Navigator.pushNamed(context, "/main");
       }
     } catch (e) {
@@ -185,17 +190,24 @@ class _RegisterPageState extends State<RegisterPage> {
     return emailRegex.hasMatch(email);
   }
 
-  //   void _signUn() async {
-  //   String username = _usernameController.text;
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
+  Future<void> _createUserProfile(
+      String userId, String username, String email) async {
+    try {
+      // Reference to the 'users' collection in Firebase Firestore
+      CollectionReference usersRef =
+          FirebaseFirestore.instance.collection('users');
 
-  //   User? user = await _auth.signUnWithEmailAndPassword(email, password);
+      // Create or update a document with userId as document ID
+      await usersRef.doc(userId).set({
+        'username': username,
+        'email': email,
+        'password': ''
+        // Add additional fields as needed
+      });
 
-  //   if (user != null) {
-  //     print("User is sucessfully Created");
-  //     Navigator.pushNamed(context, "/home");
-  //   } else
-  //     print("Some error happend");
-  // }
+      print('User profile created in Firestore');
+    } catch (e) {
+      print("Error creating user profile: $e");
+    }
+  }
 }

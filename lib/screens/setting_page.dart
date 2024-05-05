@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/main_page.dart';
+import 'package:traveling_app/services/username_widget.dart';
 import 'package:traveling_app/user_auth/delete.dart';
 import 'package:traveling_app/user_auth/display.dart';
 import 'package:traveling_app/user_auth/emailedit.dart';
@@ -46,12 +47,12 @@ class _SettingPageState extends State<SettingPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'This user is Handsome',
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                          UsernameShow(
+                            textStyle: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                            ),
                           ),
                           SizedBox(
                             height: 7.h,
@@ -202,8 +203,6 @@ class _SettingPageState extends State<SettingPage> {
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Container(
                     color: Color.fromARGB(255, 215, 225, 240),

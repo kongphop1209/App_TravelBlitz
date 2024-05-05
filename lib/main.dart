@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traveling_app/screens/home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/auth_page/register_page.dart';
@@ -12,7 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: const FirebaseOptions(
         apiKey: "AIzaSyCiI-z8MKrBoiPYFf7Ni2n3fhqD0JG9Tcg",
-        appId: '125918499055:android:571c7ae40350e624aa4b1a',
+        appId: '1:125918499055:android:571c7ae40350e624aa4b1a',
         messagingSenderId: '125918499055',
         projectId: 'base-ddced'),
   );

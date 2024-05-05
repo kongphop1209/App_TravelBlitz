@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:traveling_app/services/username_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -26,11 +27,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
-                              'This user is Handsome',
-                              style: TextStyle(
+                            UsernameShow(
+                              textStyle: TextStyle(
                                 fontSize: 14.sp,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                               ),
                             ),
                             Row(

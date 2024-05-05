@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isSigningUp = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ContainerWidget(
                               controller: _emailController,
-                              hintText: 'Email or Username',
+                              hintText: 'Email',
                               isPasswordField: false,
                             ),
                             SizedBox(height: 15.h),
