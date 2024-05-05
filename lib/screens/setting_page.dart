@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
+import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/user_auth/delete.dart';
 import 'package:traveling_app/user_auth/display.dart';
 import 'package:traveling_app/user_auth/emailedit.dart';
@@ -21,225 +22,230 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: Color(0xFFF5F7FA),
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10.w),
-                  child: SizedBox(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Image.asset(
-                        'assets/images/back_icon.png',
+      backgroundColor: Color.fromRGBO(241, 247, 255, 1),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.transparent,
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'This user is Handsome',
+                            style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: 7.h,
+                          ),
+                          Text(
+                            'Edit personal information',
+                            style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    const Color.fromARGB(255, 167, 167, 167)),
+                          ),
+                        ],
                       ),
-                    ),
+                      Image.asset(
+                        'assets/images/user.png',
+                        width: 50.w,
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-                child: Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.h),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    margin: EdgeInsets.symmetric(horizontal: 20.h),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MainPage(),
+                                ),
+                              );
+                            },
+                            child: Row(
                               children: [
-                                Text(
-                                  'Username',
-                                  style: TextStyle(fontSize: 20.sp),
+                                Icon(Icons.email_outlined),
+                                SizedBox(
+                                  width: 10.h,
                                 ),
                                 Text(
-                                  'Edit personal infomations',
+                                  'My Email',
                                   style: TextStyle(
-                                    color: Color(0xFF3C3C43),
-                                    fontSize: 15,
-                                  ),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20.sp),
-                              child: Image.asset('assets/images/proflie.png'),
-                            )
-                          ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MainPage(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.edit_outlined),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  'Display Name',
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MainPage(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.lock_outline),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  'Reset Password',
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete_outline_rounded),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  'Delete My Account',
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 80.h,
-              ),
-              Container(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to email page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Email_Page()),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Container(
-                              child: Image.asset('assets/images/mail.png'),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                              height: 50.h,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    " My Email ",
-                                    style: TextStyle(fontSize: 20.sp),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to display name page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DisplayName_page()),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Container(
-                              child: Image.asset('assets/images/create.png'),
-                            ),
-                            SizedBox(
-                              width: 10,
-                              height: 50,
-                            ),
-                            Text(
-                              'Display Name',
-                              style: TextStyle(fontSize: 20.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to reset password page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ResetPassword_Page()),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Container(
-                              child: Image.asset('assets/images/locker.png'),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                              height: 50.h,
-                            ),
-                            Text(
-                              'Reset Password',
-                              style: TextStyle(fontSize: 20.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to delete account page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DeleteAccount_Page()),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Container(
-                              child: Image.asset('assets/images/bin.png'),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                              height: 50.h,
-                            ),
-                            Text(
-                              'Delete My Account',
-                              style: TextStyle(fontSize: 20.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 80.h),
-                child: Container(
-                  width: 350.w,
-                  height: 50.h,
-                  child: GestureDetector(
-                    onTap: () {
-                      FirebaseAuth.instance.signOut();
-                      Navigator.pushNamed(context, "/login");
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 70.w,
+                Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  margin: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Container(
+                    color: Color.fromARGB(255, 215, 225, 240),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.logout_outlined,
+                                color: Color.fromARGB(255, 255, 118, 108),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Container(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    FirebaseAuth.instance.signOut();
+                                    Navigator.pushNamed(context, '/login');
+                                  },
+                                  child: Text(
+                                    'Sign Out',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromARGB(255, 255, 118, 108),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            child: Image.asset('assets/images/exit.png'),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            'Sign Out',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.sp,
-                                letterSpacing: 2.2,
-                                color: Color(0xFFC0C4CC)),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

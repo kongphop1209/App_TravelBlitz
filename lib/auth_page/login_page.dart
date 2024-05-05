@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/register_page.dart';
 import 'package:traveling_app/main_page.dart';
-import 'package:traveling_app/services/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 15.h,
                             ),
                             GestureDetector(
-                              onTap: _signIn,
+                              onTap: _login,
                               child: Container(
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 alignment: Alignment.center,
@@ -149,17 +149,36 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _signIn() async {
+  void _login() async {
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
-    if (user != null) {
-      print("User is sucessfully SignIn");
-      Navigator.pushNamed(context, "/main");
-    } else
-      print("Some error happend");
+    if (!_isEmailValid(email)) {
+      print("Invalid email address");
+      return;
+    }
+
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      if (userCredential.user != null) {
+        print("User is successfully Signin");
+        Navigator.pushNamed(context, "/main");
+      }
+    } catch (e) {
+      print("Error occurred during sign-in: $e");
+    }
   }
+}
+
+bool _isEmailValid(String email) {
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  return emailRegex.hasMatch(email);
 }
