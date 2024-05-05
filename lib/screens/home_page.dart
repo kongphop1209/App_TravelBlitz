@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:traveling_app/screens/coupon.dart';
 import 'package:traveling_app/screens/flight_page.dart';
+import 'package:traveling_app/screens/popular.dart';
 import 'package:traveling_app/screens/setting_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
 
@@ -192,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Container(
                       height: MediaQuery.of(context).size.height * 0.18,
@@ -208,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(
@@ -220,10 +222,11 @@ class _HomePageState extends State<HomePage> {
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FlightPage()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const FlightPage(),
+                                ),
+                              );
                             },
                             child: Container(
                               child: Image.asset(
@@ -232,19 +235,39 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          Image.asset(
-                            'assets/images/popular.png',
-                            width: 60.w,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PopularPage(),
+                                ),
+                              );
+                            },
+                            child: Image.asset(
+                              'assets/images/popular.png',
+                              width: 60.w,
+                            ),
                           ),
-                          Image.asset(
-                            'assets/images/coupon.png',
-                            width: 60.w,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CouponPage(),
+                                ),
+                              );
+                            },
+                            child: Image.asset(
+                              'assets/images/coupon.png',
+                              width: 60.w,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: 35.h,
+                      height: MediaQuery.of(context).size.height * 0.035,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -278,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 6.h,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -299,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     Container(
                       child: SingleChildScrollView(

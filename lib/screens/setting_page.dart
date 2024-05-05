@@ -95,7 +95,7 @@ class _SettingPageState extends State<SettingPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MainPage(),
+                                  builder: (context) => Email_Page(),
                                 ),
                               );
                             },
