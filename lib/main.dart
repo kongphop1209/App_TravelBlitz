@@ -9,6 +9,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: const FirebaseOptions(
         apiKey: "AIzaSyCiI-z8MKrBoiPYFf7Ni2n3fhqD0JG9Tcg",

@@ -204,43 +204,41 @@ class _SettingPageState extends State<SettingPage> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Container(
-                    color: Color.fromARGB(255, 215, 225, 240),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 15.h),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.logout_outlined,
-                                color: Color.fromARGB(255, 255, 118, 108),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              Container(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    FirebaseAuth.instance.signOut();
-                                    Navigator.pushNamed(context, '/login');
-                                  },
-                                  child: Text(
-                                    'Sign Out',
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 255, 118, 108),
-                                    ),
+                  color: Color.fromARGB(255, 215, 225, 240),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.logout_outlined,
+                              color: Color.fromARGB(255, 255, 118, 108),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Container(
+                              child: GestureDetector(
+                                onTap: () {
+                                  FirebaseAuth.instance.signOut();
+                                  Navigator.pushNamed(context, '/login');
+                                },
+                                child: Text(
+                                  'Sign Out',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color.fromARGB(255, 255, 118, 108),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
