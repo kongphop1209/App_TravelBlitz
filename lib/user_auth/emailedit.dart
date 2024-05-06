@@ -53,19 +53,14 @@ class _Email_PageState extends State<Email_Page> {
                           borderRadius: BorderRadius.circular(12))),
                   onPressed: () {},
                   child: Container(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 110,
-                        ),
-                        Text(
-                          'Save',
-                          style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 2.2,
-                              color: Colors.white),
-                        ),
-                      ],
+                    child: Center(
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                            fontSize: 16,
+                            letterSpacing: 2.2,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
