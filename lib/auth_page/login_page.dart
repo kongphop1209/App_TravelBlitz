@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import 'package:firebase_auth/firebase_auth.dart';
->>>>>>> Back-up
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -94,48 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-<<<<<<< HEAD
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Don't have account?",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 114, 114, 114)),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, animation,
-                                          secondaryAnimation) {
-                                        return const RegisterPage();
-                                      },
-                                      transitionsBuilder: (context, animation,
-                                          secondaryAnimation, child) {
-                                        const begin = Offset(1.0, 0.0);
-                                        const end = Offset.zero;
-                                        const curve = Curves.easeInOut;
-                
-                                        var tween =
-                                            Tween(begin: begin, end: end).chain(
-                                          CurveTween(curve: curve),
-                                        );
-                
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  'Register',
-                                  style: TextStyle(color: Colors.blue),
-=======
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -144,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                                   style: TextStyle(
                                       color:
                                           Color.fromARGB(255, 114, 114, 114)),
->>>>>>> Back-up
                                 ),
                                 TextButton(
                                   onPressed: () {
