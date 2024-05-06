@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -65,19 +65,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               hintText: 'Email',
                               isPasswordField: false,
                             ),
-                            SizedBox(height: 15.h),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
                             ContainerWidget(
                               controller: _usernameController,
                               hintText: 'Username',
                               isPasswordField: false,
                             ),
-                            SizedBox(height: 15.h),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
                             ContainerWidget(
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
                             ),
-                            SizedBox(height: 10.h),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
                             GestureDetector(
                               onTap: _register,
                               child: Container(
@@ -98,6 +104,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                               ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,

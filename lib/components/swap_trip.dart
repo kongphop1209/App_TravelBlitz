@@ -59,9 +59,13 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
                       color: const Color.fromARGB(255, 124, 124, 124),
                     ),
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   Image.asset('assets/images/airplane_from_to.png'),
-                  SizedBox(width: 15.w),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   Text(
                     'To',
                     style: TextStyle(
@@ -74,7 +78,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 0.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             TextButton(
               onPressed:
@@ -105,7 +109,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 0.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -124,7 +128,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
               width: double.infinity,
@@ -177,9 +181,13 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
                       color: const Color.fromARGB(255, 124, 124, 124),
                     ),
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   Image.asset('assets/images/airplane_from_to.png'),
-                  SizedBox(width: 15.w),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   Text(
                     'To',
                     style: TextStyle(
@@ -192,7 +200,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 0.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 0.0.h),
@@ -274,7 +282,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 0.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -293,7 +301,7 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
               width: double.infinity,
