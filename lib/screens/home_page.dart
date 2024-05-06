@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 25.w),
@@ -301,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: MediaQuery.of(context).size.height * 0.015,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -333,19 +333,19 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset('assets/images/Banner.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner_1.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner_1.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                             ],
                           ),

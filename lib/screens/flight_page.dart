@@ -158,7 +158,8 @@ class _FlightPageState extends State<FlightPage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10.h,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
                                 ),
                                 OptionTextWidget(
                                   selectedOption: _selectedOption,
@@ -171,7 +172,7 @@ class _FlightPageState extends State<FlightPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: MediaQuery.of(context).size.height * 0.025,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 45.w),
@@ -187,7 +188,7 @@ class _FlightPageState extends State<FlightPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: MediaQuery.of(context).size.height * 0.025,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 40.w),
@@ -217,7 +218,7 @@ class _FlightPageState extends State<FlightPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: MediaQuery.of(context).size.height * 0.025,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 45.w),
@@ -233,7 +234,7 @@ class _FlightPageState extends State<FlightPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Container(
                     child: SingleChildScrollView(
@@ -249,19 +250,19 @@ class _FlightPageState extends State<FlightPage> {
                             children: [
                               Image.asset('assets/images/banner_flight1.png'),
                               SizedBox(
-                                width: 20.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                               Image.asset('assets/images/banner_flight2.png'),
                               SizedBox(
-                                width: 20.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                               Image.asset('assets/images/banner_flight1.png'),
                               SizedBox(
-                                width: 20.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                               Image.asset('assets/images/banner_flight2.png'),
                               SizedBox(
-                                width: 20.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                             ],
                           ),

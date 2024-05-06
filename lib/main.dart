@@ -31,12 +31,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, _) => MaterialApp(
-        initialRoute: '/login', // Set the initial route to '/login'
+        initialRoute: '/login',
         routes: {
           '/login': (context) => const LoginPage(),
           '/main': (context) => const MainPage(),
-          '/home': (context) =>
-              const HomePage(), // Define the route for '/home'
+          '/home': (context) => const HomePage(),
           '/register': (context) => const RegisterPage(),
         },
         home: const LoginPage(),

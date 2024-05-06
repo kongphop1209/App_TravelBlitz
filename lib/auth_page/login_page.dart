@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 40.h,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -69,11 +69,12 @@ class _LoginPageState extends State<LoginPage> {
                               isPasswordField: true,
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             GestureDetector(
                               onTap: _login,
                               child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
                                 alignment: Alignment.center,
                                 width: double.infinity,

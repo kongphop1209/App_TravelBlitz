@@ -41,7 +41,10 @@ class _MyTripPageState extends State<MyTripPage> {
                                           width: 50.w,
                                         ),
                                         SizedBox(
-                                          width: 10.w,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.03,
                                         ),
                                         Column(
                                           crossAxisAlignment:
