@@ -43,38 +43,36 @@ class _SettingPageState extends State<SettingPage> {
               ),
               Container(
                 alignment: Alignment.topCenter,
-                child: Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Username',
-                                  style: TextStyle(fontSize: 20.sp),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Username',
+                                style: TextStyle(fontSize: 20.sp),
+                              ),
+                              Text(
+                                'Edit personal infomations',
+                                style: TextStyle(
+                                  color: Color(0xFF3C3C43),
+                                  fontSize: 15,
                                 ),
-                                Text(
-                                  'Edit personal infomations',
-                                  style: TextStyle(
-                                    color: Color(0xFF3C3C43),
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20.sp),
-                              child: Image.asset('assets/images/proflie.png'),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                            child: Image.asset('assets/images/proflie.png'),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
