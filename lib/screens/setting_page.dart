@@ -1,16 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
-import 'package:traveling_app/user_auth/delete.dart';
-import 'package:traveling_app/user_auth/display.dart';
 import 'package:traveling_app/user_auth/emailedit.dart';
-import 'package:traveling_app/user_auth/resetpass.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});

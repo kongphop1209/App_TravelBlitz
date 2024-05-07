@@ -1,11 +1,7 @@
-// ignore_for_file: deprecated_member_use
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import 'package:traveling_app/screens/coupon.dart';
 import 'package:traveling_app/screens/flight_page.dart';
 import 'package:traveling_app/screens/popular.dart';
@@ -389,25 +385,21 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Disable Android back button press
+
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       _disableBackButtonAndroid(context);
     });
   }
 
   void _disableBackButtonAndroid(BuildContext context) {
-    // Disable the Android back button for navigating back to the login page
     ModalRoute.of(context)?.removeScopedWillPopCallback(_onWillPop);
     ModalRoute.of(context)?.addScopedWillPopCallback(_onWillPop);
   }
 
   Future<bool> _onWillPop() async {
-    // Check if you're on the login page
     if (ModalRoute.of(context)?.settings.name == "/login") {
-      // If on the login page, exit the app
       return true;
     } else {
-      // Otherwise, pop until you reach the login page
       Navigator.popUntil(context, ModalRoute.withName("/login"));
       return false;
     }
