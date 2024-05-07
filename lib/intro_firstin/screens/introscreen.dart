@@ -34,17 +34,17 @@ class IntroScreen extends StatelessWidget {
                     image: 'assets/images/aboard.gif',
                     title: 'Welcome',
                     subtitle:
-                        "Let us help you to find the special place you can go !"),
+                        "Start your journey with us and explore amazing destinations around the world!"),
                 WidgetIntro(
                     image: 'assets/images/airplane-dukdik.gif',
                     title: 'Trust',
                     subtitle:
-                        "Let us help you to find the special place you can go !"),
+                        "Your trust is our top priority. We are committed to providing a secure and reliable travel experience for you."),
                 WidgetIntro(
                     image: 'assets/images/arrives.gif',
                     title: 'Explore',
                     subtitle:
-                        "Let us help you to find the special place you can go !"),
+                        " Start exploring the world with us today and turn your travel dreams into reality. Let's make every journey an unforgettable adventure together!"),
               ],
             ),
           ),
