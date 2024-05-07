@@ -12,12 +12,12 @@ class IntroController extends GetxController {
 
   void dotNavigationClick(index) {
     currentPageIndex.value = index;
-    pageController.jumpTo(index);
+    pageController.jumpToPage(index);
   }
 
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      Get.to(LoginPage());
+      Get.to(const LoginPage());
     } else {
       int page = currentPageIndex.value + 1;
       pageController.jumpToPage(page);

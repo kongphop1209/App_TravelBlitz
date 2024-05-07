@@ -5,12 +5,13 @@ class WidgetIntro extends StatelessWidget {
   const WidgetIntro(
       {super.key,
       required this.image,
+      this.fit,
       this.style,
       required this.title,
       required this.subtitle});
 
   final String image, title, subtitle;
-  final String? style;
+  final String? style, fit;
 
   @override
   Widget build(BuildContext context) {

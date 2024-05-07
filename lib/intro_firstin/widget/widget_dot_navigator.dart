@@ -15,9 +15,9 @@ class WidgetNavigator extends StatelessWidget {
       bottom: MediaQuery.of(context).size.height * 0.1,
       left: MediaQuery.of(context).size.width * 0.1,
       child: SmoothPageIndicator(
+        count: 3,
         controller: controller.pageController,
         onDotClicked: controller.dotNavigationClick,
-        count: 3,
         effect: ExpandingDotsEffect(
             activeDotColor: Colors.blue, dotHeight: 8.h, dotWidth: 15.w),
       ),
