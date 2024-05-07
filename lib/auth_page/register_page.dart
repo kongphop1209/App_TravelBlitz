@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               height: MediaQuery.of(context).size.height * 0.02,
                             ),
                             GestureDetector(
-                              onTap: _register,
+                              onTap: isSigningUp ? null : _register,
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -95,14 +95,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Text(
-                                  'Register',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                child: isSigningUp
+                                    ? CupertinoActivityIndicator(
+                                        animating: true,
+                                        radius: 15.0,
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        'Register',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                               ),
                             ),
                             SizedBox(
@@ -177,6 +183,10 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
+    setState(() {
+      isSigningUp = true;
+    });
+
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -189,8 +199,17 @@ class _RegisterPageState extends State<RegisterPage> {
         await _createUserProfile(userCredential.user!.uid, username, email);
         Navigator.pushNamed(context, "/main");
       }
+
+      // Set loading state to false after registration process completes
+      setState(() {
+        isSigningUp = false;
+      });
     } catch (e) {
       print("Error occurred during sign-up: $e");
+      // Set loading state to false in case of error
+      setState(() {
+        isSigningUp = false;
+      });
     }
   }
 

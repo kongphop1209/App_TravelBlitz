@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:traveling_app/intro_firstin/screens/introscreen.dart';
 import 'package:traveling_app/screens/home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
@@ -30,15 +32,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (context, _) => MaterialApp(
-        initialRoute: '/login',
+      builder: (context, _) => GetMaterialApp(
         routes: {
           '/login': (context) => const LoginPage(),
           '/main': (context) => const MainPage(),
           '/home': (context) => const HomePage(),
           '/register': (context) => const RegisterPage(),
         },
-        home: const LoginPage(),
+        home: const IntroScreen(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
       ),

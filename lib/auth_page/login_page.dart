@@ -63,25 +63,14 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'Email',
                               isPasswordField: false,
                             ),
-                            SizedBox(height: 15.h),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.025,
+                            ),
                             ContainerWidget(
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
-                            ),
-                            SizedBox(height: 15.h),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: _rememberMeChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _rememberMeChecked = value!;
-                                    });
-                                  },
-                                ),
-                                Text('Remember Me'),
-                              ],
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.03,
@@ -97,14 +86,46 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
+                                child: isSigningUp
+                                    ? CupertinoActivityIndicator(
+                                        animating: true,
+                                        radius: 15.0,
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        'Login',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    activeColor: Colors.blue,
+                                    value: _rememberMeChecked,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _rememberMeChecked = value!;
+                                      });
+                                    },
                                   ),
-                                ),
+                                  Text(
+                                    'Remember Me',
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color.fromARGB(
+                                            255, 78, 78, 78)),
+                                  ),
+                                ],
                               ),
                             ),
                             Row(
@@ -170,14 +191,17 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
-
     if (!_isEmailValid(email)) {
       print("Invalid email address");
       return;
     }
 
     try {
+      // Set loading state to true
+      setState(() {
+        isSigningUp = true;
+      });
+
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -188,8 +212,18 @@ class _LoginPageState extends State<LoginPage> {
         print("User is successfully SignIn");
         Navigator.pushNamed(context, "/main");
       }
+
+      // Set loading state to false after login process completes
+      setState(() {
+        isSigningUp = false;
+      });
     } catch (e) {
       print("Error occurred during sign-in: $e");
+
+      // Set loading state to false in case of error
+      setState(() {
+        isSigningUp = false;
+      });
     }
   }
 }
