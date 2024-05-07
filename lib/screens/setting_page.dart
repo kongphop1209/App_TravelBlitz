@@ -202,15 +202,24 @@ class _SettingPageState extends State<SettingPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  color: Color.fromARGB(255, 215, 225, 240),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 215, 225, 240),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         padding: EdgeInsets.symmetric(vertical: 15.h),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.logout_outlined,
@@ -220,26 +229,20 @@ class _SettingPageState extends State<SettingPage> {
                               width: 10.w,
                             ),
                             Container(
-                              child: GestureDetector(
-                                onTap: () {
-                                  FirebaseAuth.instance.signOut();
-                                  Navigator.pushNamed(context, '/login');
-                                },
-                                child: Text(
-                                  'Sign Out',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromARGB(255, 255, 118, 108),
-                                  ),
+                              child: Text(
+                                'Sign Out',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromARGB(255, 255, 118, 108),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

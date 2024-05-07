@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isSigningUp = false;
+  bool _rememberMeChecked = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -67,6 +68,20 @@ class _LoginPageState extends State<LoginPage> {
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
+                            ),
+                            SizedBox(height: 15.h),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: _rememberMeChecked,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _rememberMeChecked = value!;
+                                    });
+                                  },
+                                ),
+                                Text('Remember Me'),
+                              ],
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.03,
@@ -152,7 +167,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
-    String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 

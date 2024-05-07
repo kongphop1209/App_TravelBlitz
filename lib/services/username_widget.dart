@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UsernameShow extends StatefulWidget {
   final Color? color;
@@ -16,7 +17,7 @@ class UsernameShow extends StatefulWidget {
 
 class _UsernameShowState extends State<UsernameShow> {
   late Future<DocumentSnapshot> _userProfileFuture;
-
+  TextEditingController usernameController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -33,6 +34,16 @@ class _UsernameShowState extends State<UsernameShow> {
 
         // Get the document snapshot
         DocumentSnapshot userSnapshot = await userDocRef.get();
+
+        // Check if "Remember Me" email is saved in shared preferences
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final String? rememberMeEmail = prefs.getString('email');
+        if (rememberMeEmail != null) {
+          setState(() {
+            usernameController.text = rememberMeEmail;
+          });
+        }
+
         return userSnapshot;
       } else {
         throw Exception('User not authenticated');
