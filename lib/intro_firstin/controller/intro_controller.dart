@@ -20,6 +20,7 @@ class IntroController extends GetxController {
       Get.to(const LoginPage());
     } else {
       int page = currentPageIndex.value + 1;
+
       pageController.jumpToPage(page);
     }
   }

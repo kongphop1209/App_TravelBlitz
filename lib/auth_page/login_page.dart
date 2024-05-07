@@ -31,6 +31,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  String? _emailError;
+  String? _passwordError;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +68,21 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.025,
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _emailError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
                             ),
                             ContainerWidget(
                               controller: _passwordController,
@@ -73,14 +90,32 @@ class _LoginPageState extends State<LoginPage> {
                               isPasswordField: true,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.03,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _passwordError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.010,
                             ),
                             GestureDetector(
                               onTap: _login,
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                alignment: Alignment.center,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
@@ -93,6 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Colors.white,
                                       )
                                     : Text(
+                                        textAlign: TextAlign.center,
                                         'Login',
                                         style: TextStyle(
                                           color: Colors.white,
@@ -191,8 +227,22 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
+    // Reset error messages
+    _emailError = null;
+    _passwordError = null;
+
     if (!_isEmailValid(email)) {
-      print("Invalid email address");
+      setState(() {
+        _emailError = 'Invalid email address';
+      });
+      return;
+    }
+
+    // Check password validity (e.g., minimum length)
+    if (!_isPasswordValid(password)) {
+      setState(() {
+        _passwordError = 'Invalid password';
+      });
       return;
     }
 
@@ -209,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (userCredential.user != null) {
-        print("User is successfully SignIn");
+        print("User is successfully signed in");
         Navigator.pushNamed(context, "/main");
       }
 
@@ -224,7 +274,39 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         isSigningUp = false;
       });
+
+      // Handle specific error cases and display appropriate error messages
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'user-not-found':
+            setState(() {
+              _emailError = 'User not found';
+            });
+            break;
+          case 'wrong-password':
+            setState(() {
+              _passwordError = 'Wrong password';
+            });
+            break;
+          // Add more cases for other error codes as needed
+          default:
+            setState(() {
+              _emailError = 'An error occurred';
+            });
+        }
+      }
     }
+  }
+
+// Validate email format
+  bool _isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+// Validate password (you can customize this validation)
+  bool _isPasswordValid(String password) {
+    return password.length >= 6; // Example: Minimum 6 characters
   }
 }
 

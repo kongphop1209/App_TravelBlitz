@@ -19,6 +19,27 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
+  Future<void> _createUserProfile(
+      String userId, String username, String email) async {
+    try {
+      // Reference to the 'users' collection in Firebase Firestore
+      CollectionReference usersRef =
+          FirebaseFirestore.instance.collection('users');
+
+      // Create or update a document with userId as document ID
+      await usersRef.doc(userId).set({
+        'username': username,
+        'email': email,
+        'password': ''
+        // Add additional fields as needed
+      });
+
+      print('User profile created in Firestore');
+    } catch (e) {
+      print("Error creating user profile: $e");
+    }
+  }
+
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -32,6 +53,10 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  String? _emailError;
+  String? _passwordError;
+  String? _usernameError;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +91,22 @@ class _RegisterPageState extends State<RegisterPage> {
                               isPasswordField: false,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.01,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _emailError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
                             ),
                             ContainerWidget(
                               controller: _usernameController,
@@ -74,12 +114,49 @@ class _RegisterPageState extends State<RegisterPage> {
                               isPasswordField: false,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.01,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _usernameError ?? '',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             ContainerWidget(
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.05),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _passwordError ?? '',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02,
@@ -178,8 +255,32 @@ class _RegisterPageState extends State<RegisterPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
+    // Reset error messages
+    setState(() {
+      _emailError = null;
+      _usernameError = null;
+      _passwordError = null;
+    });
+
     if (!_isEmailValid(email)) {
-      print("Invalid email address");
+      setState(() {
+        _emailError = 'Invalid email address';
+      });
+      return;
+    }
+
+    if (!_isUsernameValid(username)) {
+      setState(() {
+        _usernameError = 'Username must be between 1 and 16 characters';
+      });
+      return;
+    }
+
+    if (!_isPasswordValid(password)) {
+      setState(() {
+        _passwordError =
+            'Password must have at least 1 uppercase letter, 4 digits, and be at least 8 characters long';
+      });
       return;
     }
 
@@ -218,24 +319,14 @@ class _RegisterPageState extends State<RegisterPage> {
     return emailRegex.hasMatch(email);
   }
 
-  Future<void> _createUserProfile(
-      String userId, String username, String email) async {
-    try {
-      // Reference to the 'users' collection in Firebase Firestore
-      CollectionReference usersRef =
-          FirebaseFirestore.instance.collection('users');
+  bool _isUsernameValid(String username) {
+    // Username should be between 1 and 16 characters
+    return username.length >= 1 && username.length <= 16;
+  }
 
-      // Create or update a document with userId as document ID
-      await usersRef.doc(userId).set({
-        'username': username,
-        'email': email,
-        'password': ''
-        // Add additional fields as needed
-      });
-
-      print('User profile created in Firestore');
-    } catch (e) {
-      print("Error creating user profile: $e");
-    }
+  bool _isPasswordValid(String password) {
+    // Password should have at least 8 characters, including 1 uppercase letter and 4 digits
+    final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*\d{4}).{8,}$');
+    return passwordRegex.hasMatch(password);
   }
 }
