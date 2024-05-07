@@ -325,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.015,
+                      height: MediaQuery.of(context).size.height * 0.005,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
