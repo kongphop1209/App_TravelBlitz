@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isSigningUp = false;
+  bool _rememberMeChecked = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -29,6 +30,9 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  String? _emailError;
+  String? _passwordError;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 40.h,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -62,33 +66,102 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'Email',
                               isPasswordField: false,
                             ),
-                            SizedBox(height: 15.h),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _emailError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
                             ContainerWidget(
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.1),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _passwordError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.010,
                             ),
                             GestureDetector(
                               onTap: _login,
                               child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                alignment: Alignment.center,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
+                                child: isSigningUp
+                                    ? CupertinoActivityIndicator(
+                                        animating: true,
+                                        radius: 15.0,
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        textAlign: TextAlign.center,
+                                        'Login',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    activeColor: Colors.blue,
+                                    value: _rememberMeChecked,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _rememberMeChecked = value!;
+                                      });
+                                    },
                                   ),
-                                ),
+                                  Text(
+                                    'Remember Me',
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color.fromARGB(
+                                            255, 78, 78, 78)),
+                                  ),
+                                ],
                               ),
                             ),
                             Row(
@@ -151,18 +224,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
-    String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
+    // Reset error messages
+    _emailError = null;
+    _passwordError = null;
 
     if (!_isEmailValid(email)) {
-      print("Invalid email address");
+      setState(() {
+        _emailError = 'Invalid email address';
+      });
+      return;
+    }
+
+    // Check password validity (e.g., minimum length)
+    if (!_isPasswordValid(password)) {
+      setState(() {
+        _passwordError = 'Invalid password';
+      });
       return;
     }
 
     try {
+      // Set loading state to true
+      setState(() {
+        isSigningUp = true;
+      });
+
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -170,12 +259,54 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (userCredential.user != null) {
-        print("User is successfully SignIn");
+        print("User is successfully signed in");
         Navigator.pushNamed(context, "/main");
       }
+
+      // Set loading state to false after login process completes
+      setState(() {
+        isSigningUp = false;
+      });
     } catch (e) {
       print("Error occurred during sign-in: $e");
+
+      // Set loading state to false in case of error
+      setState(() {
+        isSigningUp = false;
+      });
+
+      // Handle specific error cases and display appropriate error messages
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'user-not-found':
+            setState(() {
+              _emailError = 'User not found';
+            });
+            break;
+          case 'wrong-password':
+            setState(() {
+              _passwordError = 'Wrong password';
+            });
+            break;
+          // Add more cases for other error codes as needed
+          default:
+            setState(() {
+              _emailError = 'An error occurred';
+            });
+        }
+      }
     }
+  }
+
+// Validate email format
+  bool _isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+// Validate password (you can customize this validation)
+  bool _isPasswordValid(String password) {
+    return password.length >= 6; // Example: Minimum 6 characters
   }
 }
 

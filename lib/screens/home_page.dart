@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,245 +28,270 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.vertical,
         child: Stack(
           children: [
-            Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.55,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    'assets/images/Background.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ],
-            ),
-            SafeArea(
+            Container(
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 10.h),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 15.w,
-                          ),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'assets/images/user.png',
-                                width: 50.w,
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hello',
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w300,
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/Background.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(left: 15.w),
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/user.png',
+                                              width: 50.w,
+                                            ),
+                                            SizedBox(
+                                              width: 10.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Hello',
+                                                  style: TextStyle(
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Color.fromARGB(
+                                                          255, 211, 211, 211)),
+                                                ),
+                                                UsernameShow(
+                                                  textStyle: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  UsernameShow(
-                                    textStyle: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(right: 15.w),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                backgroundColor: Colors.white,
+                                                title: Text('Notifications'),
+                                                content: Text(
+                                                    'You have 0 notifications'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 15.w,
+                                                              vertical: 5.h),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          color: Colors.blue),
+                                                      child: Text(
+                                                        'OK',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(10.w),
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                213, 255, 255, 255),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          child: const Icon(
+                                            Icons.notifications_none_outlined,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SettingPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(10.w),
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                213, 255, 255, 255),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          child: const Icon(
+                                            Icons.settings,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 25.w),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 6.w,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Color.fromARGB(255, 54, 54, 54)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Search',
+                                  hintStyle: TextStyle(
+                                      fontSize: 13.5.sp,
+                                      color: Color.fromARGB(255, 83, 83, 83),
+                                      fontWeight: FontWeight.w400),
+                                  border: InputBorder.none,
+                                  prefixIcon: Icon(Icons.search),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      EdgeInsets.symmetric(horizontal: 20.w),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.19,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Color.fromARGB(223, 26, 26, 26)),
+                                    color: const Color.fromARGB(80, 0, 0, 0),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FlightPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      child: Image.asset(
+                                        'assets/images/flight.png',
+                                        width: 60.w,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const PopularPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      'assets/images/popular.png',
+                                      width: 60.w,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CouponPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      'assets/images/coupon.png',
+                                      width: 60.w,
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 15.w,
-                          ),
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: Colors.white,
-                                        title: Text('Notifications'),
-                                        content:
-                                            Text('You have 0 notifications'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 15.w,
-                                                  vertical: 5.h),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Colors.blue),
-                                              child: Text(
-                                                'OK',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(10.w),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(213, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: const Icon(
-                                    Icons.notifications_none_outlined,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SettingPage(),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(10.w),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(213, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: const Icon(
-                                    Icons.settings,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 25.w),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 6.w,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border:
-                            Border.all(color: Color.fromARGB(255, 54, 54, 54)),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          hintStyle: TextStyle(
-                              fontSize: 13.5.sp,
-                              color: Color.fromARGB(255, 83, 83, 83),
-                              fontWeight: FontWeight.w400),
-                          border: InputBorder.none,
-                          prefixIcon: Icon(Icons.search),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.04,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.18,
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(10),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.01,
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 15.w,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const FlightPage(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              child: Image.asset(
-                                'assets/images/flight.png',
-                                width: 60.w,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const PopularPage(),
-                                ),
-                              );
-                            },
-                            child: Image.asset(
-                              'assets/images/popular.png',
-                              width: 60.w,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const CouponPage(),
-                                ),
-                              );
-                            },
-                            child: Image.asset(
-                              'assets/images/coupon.png',
-                              width: 60.w,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.035,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -301,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: MediaQuery.of(context).size.height * 0.015,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 30.w),
@@ -333,19 +357,19 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset('assets/images/Banner.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner_1.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.03,
                               ),
                               Image.asset('assets/images/Banner_1.png'),
                               SizedBox(
-                                width: 10.w,
+                                width: MediaQuery.of(context).size.width * 0.04,
                               ),
                             ],
                           ),
