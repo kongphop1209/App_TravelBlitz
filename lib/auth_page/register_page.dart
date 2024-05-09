@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/main_page.dart';
+import 'package:traveling_app/screens/terms.dart';
 import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
@@ -235,6 +236,26 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                               ],
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TermsOfUses(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Terms of use',
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.blue.shade800),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
                             ),
                           ],
                         ),

@@ -219,7 +219,13 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               },
-                              child: Text('Terms of use'),
+                              child: Text(
+                                'Terms of use',
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.blue.shade800),
+                              ),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02,

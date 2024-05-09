@@ -65,7 +65,7 @@ class _ContainerWidgetState extends State<ContainerWidget> {
         boxShadow: [
           BoxShadow(
             color: _isFocused
-                ? Color.fromARGB(255, 83, 184, 252)
+                ? Color.fromARGB(255, 206, 206, 206)
                 : const Color.fromARGB(255, 233, 232, 232).withOpacity(0.5),
             spreadRadius: 1,
             blurRadius: 1,

@@ -37,8 +37,8 @@ class _FlightPageState extends State<FlightPage> {
             Positioned(
               child: Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.06,
-                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                    vertical: MediaQuery.of(context).size.height * 0.05,
+                    horizontal: MediaQuery.of(context).size.width * 0.04),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color.fromARGB(255, 32, 32, 32)),
@@ -46,6 +46,7 @@ class _FlightPageState extends State<FlightPage> {
                   icon: Icon(
                     Icons.arrow_back_ios_new_outlined,
                     color: Colors.white,
+                    size: 20.w,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -59,7 +60,7 @@ class _FlightPageState extends State<FlightPage> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 35.w),
+                    margin: EdgeInsets.symmetric(horizontal: 30.w),
                     child: Column(
                       children: [
                         Container(
