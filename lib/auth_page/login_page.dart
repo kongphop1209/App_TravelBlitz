@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/auth_page/register_page.dart';
 import 'package:traveling_app/main_page.dart';
+import 'package:traveling_app/screens/terms.dart';
 import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                             Container(
                               margin: EdgeInsets.symmetric(
                                   horizontal:
-                                      MediaQuery.of(context).size.width * 0.1),
+                                      MediaQuery.of(context).size.width * 0.08),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                             Container(
                               margin: EdgeInsets.symmetric(
                                   horizontal:
-                                      MediaQuery.of(context).size.width * 0.1),
+                                      MediaQuery.of(context).size.width * 0.08),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -208,6 +209,20 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ],
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TermsOfUses(),
+                                  ),
+                                );
+                              },
+                              child: Text('Terms of use'),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
                             ),
                           ],
                         ),

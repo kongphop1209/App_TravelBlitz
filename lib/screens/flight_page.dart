@@ -34,23 +34,22 @@ class _FlightPageState extends State<FlightPage> {
                 fit: BoxFit.cover,
               ),
             ),
-            SafeArea(
+            Positioned(
               child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 10.w, vertical: 10.h),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                          child: Image.asset('assets/images/back_icon.png'),
-                        ),
-                      ),
-                    ),
-                  ],
+                margin: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.06,
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 32, 32, 32)),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ),
             ),
