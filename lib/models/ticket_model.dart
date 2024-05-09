@@ -23,7 +23,7 @@ class FirebaseService {
     };
 
     FirebaseFirestore.instance
-        .collection('bookings')
+        .collection('booking_1')
         .add(bookingData)
         .then((value) {
       print('Booking added successfully!');
