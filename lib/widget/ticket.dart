@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:traveling_app/models/ticket_model.dart';
 
 class TicketPreview extends StatefulWidget {
   final String imagePath;
@@ -24,8 +27,47 @@ class TicketPreview extends StatefulWidget {
 }
 
 class _TicketPreviewState extends State<TicketPreview> {
+  late String _username;
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch the username asynchronously when the widget initializes
+    _fetchUsername();
+  }
+
+  Future<void> _fetchUsername() async {
+    try {
+      final username = await _fetchUsernameFromFirestore();
+      setState(() {
+        _username = username;
+      });
+    } catch (e) {
+      print('Error fetching username: $e');
+      // Handle error
+    }
+  }
+
+  Future<String> _fetchUsernameFromFirestore() async {
+    try {
+      if (FirebaseAuth.instance.currentUser != null) {
+        final userId = FirebaseAuth.instance.currentUser!.uid;
+        final userDocRef =
+            FirebaseFirestore.instance.collection('users').doc(userId);
+        final userSnapshot = await userDocRef.get();
+        return userSnapshot['username'];
+      } else {
+        throw Exception('User not authenticated');
+      }
+    } catch (e) {
+      print('Error fetching username from Firestore: $e');
+      throw e;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isSelected = false;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
       margin: EdgeInsets.symmetric(horizontal: 20.w),
@@ -83,34 +125,13 @@ class _TicketPreviewState extends State<TicketPreview> {
               ),
               TextButton(
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: Colors.white,
-                        title: Text('Confirmation'),
-                        content: Text(
-                            'Your booking has been confirmed. please check in your booking.'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 15.w, vertical: 8.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.blue),
-                              child: Text(
-                                'OK',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                  FirebaseService().addBookingToFirestore(
+                    context,
+                    _username,
+                    widget.time,
+                    widget.duration,
+                    widget.airline,
+                    widget.price,
                   );
                 },
                 child: Container(
