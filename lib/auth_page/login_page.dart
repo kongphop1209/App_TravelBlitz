@@ -139,28 +139,46 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                               ),
                             ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 30.w),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
-                                    value: _rememberMeChecked,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _rememberMeChecked = value!;
-                                      });
-                                    },
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Forget Password',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                  Text(
-                                    'Remember Me',
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color.fromARGB(
-                                            255, 78, 78, 78)),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        checkColor: Colors.white,
+                                        activeColor: Colors.blue,
+                                        value: _rememberMeChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _rememberMeChecked = value!;
+                                          });
+                                        },
+                                      ),
+                                      Text(
+                                        'Remember Me',
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color.fromARGB(
+                                                255, 78, 78, 78)),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -203,9 +221,12 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Register',
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],

@@ -230,9 +230,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       ),
                                     );
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Login',
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],
