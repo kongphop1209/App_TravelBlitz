@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:traveling_app/auth_page/forgetpassword_1.dart';
 import 'package:traveling_app/auth_page/register_page.dart';
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/screens/terms.dart';
@@ -139,28 +141,54 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                               ),
                             ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 30.w),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
-                                    value: _rememberMeChecked,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _rememberMeChecked = value!;
-                                      });
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgetPassword(),
+                                        ),
+                                      );
                                     },
+                                    child: Text(
+                                      'Forget Password',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                  Text(
-                                    'Remember Me',
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color.fromARGB(
-                                            255, 78, 78, 78)),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        checkColor: Colors.white,
+                                        activeColor: Colors.blue,
+                                        value: _rememberMeChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _rememberMeChecked = value!;
+                                          });
+                                        },
+                                      ),
+                                      Text(
+                                        'Remember Me',
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color.fromARGB(
+                                                255, 78, 78, 78)),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -203,9 +231,12 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Register',
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],
@@ -219,7 +250,13 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               },
-                              child: Text('Terms of use'),
+                              child: Text(
+                                'Terms of use',
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.blue.shade800),
+                              ),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02,
@@ -242,7 +279,6 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    // Reset error messages
     _emailError = null;
     _passwordError = null;
 
@@ -253,7 +289,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // Check password validity (e.g., minimum length)
     if (!_isPasswordValid(password)) {
       setState(() {
         _passwordError = 'Invalid password';
@@ -262,7 +297,6 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     try {
-      // Set loading state to true
       setState(() {
         isSigningUp = true;
       });
@@ -278,19 +312,16 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushNamed(context, "/main");
       }
 
-      // Set loading state to false after login process completes
       setState(() {
         isSigningUp = false;
       });
     } catch (e) {
       print("Error occurred during sign-in: $e");
 
-      // Set loading state to false in case of error
       setState(() {
         isSigningUp = false;
       });
 
-      // Handle specific error cases and display appropriate error messages
       if (e is FirebaseAuthException) {
         switch (e.code) {
           case 'user-not-found':
@@ -303,7 +334,6 @@ class _LoginPageState extends State<LoginPage> {
               _passwordError = 'Wrong password';
             });
             break;
-          // Add more cases for other error codes as needed
           default:
             setState(() {
               _emailError = 'An error occurred';
@@ -313,15 +343,13 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-// Validate email format
   bool _isEmailValid(String email) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
   }
 
-// Validate password (you can customize this validation)
   bool _isPasswordValid(String password) {
-    return password.length >= 6; // Example: Minimum 6 characters
+    return password.length >= 6;
   }
 }
 

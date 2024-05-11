@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/screens/coupon.dart';
-import 'package:traveling_app/screens/flight_page.dart';
+import 'package:traveling_app/screens/flight_search.dart';
 import 'package:traveling_app/screens/popular.dart';
 import 'package:traveling_app/screens/setting_page.dart';
 import 'package:traveling_app/services/username_widget.dart';

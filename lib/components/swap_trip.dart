@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:traveling_app/screens/buying_page.dart';
+import 'package:traveling_app/screens/booking_information_page.dart';
 
 class OptionTextWidget extends StatefulWidget {
   final String selectedOption;
@@ -15,11 +15,10 @@ class OptionTextWidget extends StatefulWidget {
 }
 
 class _OptionTextWidgetState extends State<OptionTextWidget> {
-  DateTime? selectedDate;
-
+  late DateTime selectedDate = DateTime.now();
   String _formatDate(DateTime date) {
-    final dateFormat = DateFormat('E, MMM d');
-    return dateFormat.format(date);
+    final today = DateFormat('E, MMM d');
+    return today.format(date);
   }
 
   void _showDatePicker() async {
@@ -202,83 +201,79 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0.0.h),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed:
-                          // Show calendar picker dialog
-                          _showDatePicker,
-                      child: Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 5.h),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color.fromARGB(255, 224, 223, 223)),
-                              child: Text(
-                                selectedDate != null
-                                    ? _formatDate(selectedDate!)
-                                    : _formatDate(DateTime.now()),
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Text(
-                      '3 Days',
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey),
-                    ),
-                    TextButton(
-                      onPressed:
-                          // Show calendar picker dialog
-                          _showDatePicker,
-                      child: Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 5.h),
-                              decoration: BoxDecoration(
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed:
+                        // Show calendar picker dialog
+                        _showDatePicker,
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 5.h),
+                            decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Color.fromARGB(255, 224, 223, 223),
-                              ),
-                              child: Text(
-                                selectedDate != null
-                                    ? _formatDate(
-                                        selectedDate!.add(
-                                          Duration(days: 3),
-                                        ),
-                                      )
-                                    : 'Choose',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      const Color.fromARGB(255, 116, 115, 115),
-                                ),
+                                color: Color.fromARGB(255, 224, 223, 223)),
+                            child: Text(
+                              selectedDate != null
+                                  ? _formatDate(selectedDate!)
+                                  : _formatDate(DateTime.now()),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    '3 Days',
+                    style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey),
+                  ),
+                  TextButton(
+                    onPressed:
+                        // Show calendar picker dialog
+                        _showDatePicker,
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 5.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color.fromARGB(255, 224, 223, 223),
+                            ),
+                            child: Text(
+                              selectedDate != null
+                                  ? _formatDate(
+                                      selectedDate!.add(
+                                        Duration(days: 3),
+                                      ),
+                                    )
+                                  : 'Choose',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: const Color.fromARGB(255, 116, 115, 115),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
