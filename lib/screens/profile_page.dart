@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:traveling_app/screens/coupon.dart';
+import 'package:traveling_app/screens/setting_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -108,13 +111,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.04,
+                                width: MediaQuery.of(context).size.width * 0.02,
                               ),
-                              Text(
-                                'Customize',
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SettingPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Customize',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
@@ -145,13 +158,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.04,
+                                width: MediaQuery.of(context).size.width * 0.02,
                               ),
-                              Text(
-                                'Notifications',
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Notifications',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
@@ -182,13 +198,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.04,
+                                width: MediaQuery.of(context).size.width * 0.02,
                               ),
-                              Text(
-                                'Coupon',
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CouponPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Coupon',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
@@ -219,13 +245,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.04,
+                                width: MediaQuery.of(context).size.width * 0.02,
                               ),
-                              Text(
-                                'Saved flight',
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w500),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Saved Locations',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
