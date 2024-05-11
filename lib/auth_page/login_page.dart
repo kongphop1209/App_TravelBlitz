@@ -3,8 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:traveling_app/auth_page/forgetpassword_1.dart';
 import 'package:traveling_app/auth_page/register_page.dart';
 import 'package:traveling_app/main_page.dart';
+import 'package:traveling_app/screens/terms.dart';
 import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
@@ -17,6 +20,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isSigningUp = false;
+  bool _rememberMeChecked = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -29,6 +33,9 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  String? _emailError;
+  String? _passwordError;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 40.h,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.w),
@@ -62,33 +69,128 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'Email',
                               isPasswordField: false,
                             ),
-                            SizedBox(height: 15.h),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _emailError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
                             ContainerWidget(
                               controller: _passwordController,
                               hintText: 'Password',
                               isPasswordField: true,
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _passwordError ?? '',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.010,
                             ),
                             GestureDetector(
                               onTap: _login,
                               child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                                alignment: Alignment.center,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
+                                child: isSigningUp
+                                    ? CupertinoActivityIndicator(
+                                        animating: true,
+                                        radius: 15.0,
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        textAlign: TextAlign.center,
+                                        'Login',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgetPassword(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Forget Password',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                ),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        checkColor: Colors.white,
+                                        activeColor: Colors.blue,
+                                        value: _rememberMeChecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _rememberMeChecked = value!;
+                                          });
+                                        },
+                                      ),
+                                      Text(
+                                        'Remember Me',
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color.fromARGB(
+                                                255, 78, 78, 78)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                             Row(
@@ -129,12 +231,35 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Register',
-                                    style: TextStyle(color: Colors.blue),
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TermsOfUses(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Terms of use',
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.blue.shade800),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
                             ),
                           ],
                         ),
@@ -151,18 +276,31 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
-    String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
+    _emailError = null;
+    _passwordError = null;
 
     if (!_isEmailValid(email)) {
-      print("Invalid email address");
+      setState(() {
+        _emailError = 'Invalid email address';
+      });
+      return;
+    }
+
+    if (!_isPasswordValid(password)) {
+      setState(() {
+        _passwordError = 'Invalid password';
+      });
       return;
     }
 
     try {
+      setState(() {
+        isSigningUp = true;
+      });
+
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -170,12 +308,48 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (userCredential.user != null) {
-        print("User is successfully SignIn");
+        print("User is successfully signed in");
         Navigator.pushNamed(context, "/main");
       }
+
+      setState(() {
+        isSigningUp = false;
+      });
     } catch (e) {
       print("Error occurred during sign-in: $e");
+
+      setState(() {
+        isSigningUp = false;
+      });
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'user-not-found':
+            setState(() {
+              _emailError = 'User not found';
+            });
+            break;
+          case 'wrong-password':
+            setState(() {
+              _passwordError = 'Wrong password';
+            });
+            break;
+          default:
+            setState(() {
+              _emailError = 'An error occurred';
+            });
+        }
+      }
     }
+  }
+
+  bool _isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  bool _isPasswordValid(String password) {
+    return password.length >= 6;
   }
 }
 

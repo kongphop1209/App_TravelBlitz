@@ -1,17 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+<<<<<<< HEAD
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
+=======
+>>>>>>> 11b7f93d0a93b2f2eab9d0b9f3f7279da5d7474b
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
-import 'package:traveling_app/user_auth/delete.dart';
-import 'package:traveling_app/user_auth/display.dart';
 import 'package:traveling_app/user_auth/emailedit.dart';
-import 'package:traveling_app/user_auth/resetpass.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -203,6 +202,7 @@ class _SettingPageState extends State<SettingPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
+<<<<<<< HEAD
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Container(
@@ -237,14 +237,49 @@ class _SettingPageState extends State<SettingPage> {
                                       color: Color.fromARGB(255, 255, 118, 108),
                                     ),
                                   ),
+=======
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        margin: EdgeInsets.symmetric(horizontal: 20.w),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 215, 225, 240),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 15.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.logout_outlined,
+                              color: Color.fromARGB(255, 255, 118, 108),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Container(
+                              child: Text(
+                                'Sign Out',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromARGB(255, 255, 118, 108),
+>>>>>>> 11b7f93d0a93b2f2eab9d0b9f3f7279da5d7474b
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

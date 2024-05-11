@@ -16,7 +16,7 @@ class ContainerWidget extends StatefulWidget {
   final TextInputType? inputType;
 
   const ContainerWidget({
-    super.key,
+    Key? key,
     this.controller,
     this.isPasswordField = false,
     this.fieldKey,
@@ -27,7 +27,7 @@ class ContainerWidget extends StatefulWidget {
     this.validator,
     this.onFieldSubmitted,
     this.inputType,
-  });
+  }) : super(key: key);
 
   @override
   State<ContainerWidget> createState() => _ContainerWidgetState();
@@ -35,6 +35,25 @@ class ContainerWidget extends StatefulWidget {
 
 class _ContainerWidgetState extends State<ContainerWidget> {
   bool _obscureText = true;
+  late FocusNode _focusNode;
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +64,17 @@ class _ContainerWidgetState extends State<ContainerWidget> {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 233, 232, 232).withOpacity(0.5),
-            spreadRadius: 0,
+            color: _isFocused
+                ? Color.fromARGB(255, 206, 206, 206)
+                : const Color.fromARGB(255, 233, 232, 232).withOpacity(0.5),
+            spreadRadius: 1,
             blurRadius: 1,
-            offset: const Offset(0, 3),
+            offset: const Offset(0, 0.5),
           ),
         ],
       ),
       child: TextFormField(
+        focusNode: _focusNode,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
