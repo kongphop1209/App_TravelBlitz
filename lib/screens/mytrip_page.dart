@@ -66,6 +66,9 @@ class _MyTripPageState extends State<MyTripPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if flight data is available (assuming non-empty airline as a check)
+    bool hasFlightData = airline.isNotEmpty;
+
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -125,7 +128,8 @@ class _MyTripPageState extends State<MyTripPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SettingPage()),
+                            builder: (context) => SettingPage(),
+                          ),
                         );
                       },
                       child: Container(
@@ -154,36 +158,47 @@ class _MyTripPageState extends State<MyTripPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.blue, Color.fromARGB(255, 170, 245, 255)],
-                    ),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
+                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+
+                // Flight Info Section (Conditional Rendering)
+                if (hasFlightData)
+                  Column(
                     children: [
-                      _buildFlightInfoItem('Airline', airline),
-                      _buildFlightInfoItem('Duration', duration),
-                      _buildFlightInfoItem('Price', price),
-                      _buildFlightInfoItem('Time', time),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                          horizontal: 10.w,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.blue,
+                              Color.fromARGB(255, 170, 245, 255),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            _buildFlightInfoItem('Airline', airline),
+                            _buildFlightInfoItem('Duration', duration),
+                            _buildFlightInfoItem('Price', price),
+                            _buildFlightInfoItem('Time', time),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(color: Colors.amber),
+                        child: Text(''),
+                      ),
                     ],
                   ),
-                ),
-                Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 125, 125)),
-                  child: Text(''),
-                ),
               ],
             ),
           ),

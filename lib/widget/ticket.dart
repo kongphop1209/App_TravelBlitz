@@ -132,6 +132,7 @@ class _TicketPreviewState extends State<TicketPreview> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          backgroundColor: Colors.white,
                           title: Text("Booking Confirmation"),
                           content: Text(
                               "Are you sure you want to book this flight?"),
@@ -141,7 +142,20 @@ class _TicketPreviewState extends State<TicketPreview> {
                                 // Close the dialog
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Cancel"),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.w, vertical: 5.h),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255)),
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0)),
+                                ),
+                              ),
                             ),
                             TextButton(
                               onPressed: () async {
@@ -163,7 +177,17 @@ class _TicketPreviewState extends State<TicketPreview> {
                                 // Close the dialog
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Confirm"),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.w, vertical: 5.h),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.blue),
+                                child: Text(
+                                  'Confirm',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                           ],
                         );

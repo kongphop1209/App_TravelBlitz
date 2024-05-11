@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool hasFlightData = airline.isNotEmpty;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: RefreshIndicator(
@@ -263,19 +264,21 @@ class _HomePageState extends State<HomePage> {
                                     MediaQuery.of(context).size.height * 0.03,
                               ),
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: 20.w,
+                                ),
                                 height:
                                     MediaQuery.of(context).size.height * 0.19,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Color.fromARGB(223, 26, 26, 26)),
+                                    color: Color.fromARGB(223, 26, 26, 26),
+                                  ),
                                   color: const Color.fromARGB(80, 0, 0, 0),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(
@@ -283,28 +286,36 @@ class _HomePageState extends State<HomePage> {
                                         top: 5.h,
                                       ),
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 10.w, vertical: 5.h),
+                                        horizontal: 10.w,
+                                        vertical: 5.h,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.black,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Text(
-                                        'On going',
+                                        hasFlightData
+                                            ? 'On going'
+                                            : 'No Flight',
                                         style: TextStyle(
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color.fromARGB(
-                                                255, 255, 217, 0)),
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: hasFlightData
+                                              ? Color.fromARGB(255, 255, 217, 0)
+                                              : Colors
+                                                  .red, // Change color for 'No Flight'
+                                        ),
                                       ),
                                     ),
-                                    Column(
-                                      children: [
-                                        _buildFlightInfoItem('', duration),
-                                      ],
-                                    ),
-                                    _buildFlightInfoItem('', time),
-                                    _buildFlightInfoItem(
-                                        airline, '● Economy ● Direct'),
+                                    if (hasFlightData)
+                                      Column(
+                                        children: [
+                                          _buildFlightInfoItem('', duration),
+                                          _buildFlightInfoItem('', time),
+                                          _buildFlightInfoItem(
+                                              airline, '● Economy ● Direct'),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               ),
