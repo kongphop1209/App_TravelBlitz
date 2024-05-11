@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
-import 'package:traveling_app/user_auth/emailedit.dart';
+import 'package:traveling_app/screens/user_auth/delete.dart';
+import 'package:traveling_app/screens/user_auth/display.dart';
+import 'package:traveling_app/screens/user_auth/emailedit.dart';
+import 'package:traveling_app/screens/user_auth/resetpass.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -118,7 +121,7 @@ class _SettingPageState extends State<SettingPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MainPage(),
+                                  builder: (context) => DisplayNamePage(),
                                 ),
                               );
                             },
@@ -146,7 +149,7 @@ class _SettingPageState extends State<SettingPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MainPage(),
+                                  builder: (context) => ResetPassword_Page(),
                                 ),
                               );
                             },
@@ -171,7 +174,12 @@ class _SettingPageState extends State<SettingPage> {
                           padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DeleteAccount_Page(),
+                                ),
+                              );
                             },
                             child: Row(
                               children: [

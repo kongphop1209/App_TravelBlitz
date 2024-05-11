@@ -124,15 +124,55 @@ class _TicketPreviewState extends State<TicketPreview> {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  FirebaseService().addBookingToFirestore(
-                    context,
-                    _username,
-                    widget.time,
-                    widget.duration,
-                    widget.airline,
-                    widget.price,
-                  );
+                onPressed: () async {
+                  String? userId = FirebaseAuth.instance.currentUser?.uid;
+
+                  if (userId != null) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Booking Confirmation"),
+                          content: Text(
+                              "Are you sure you want to book this flight?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                // Close the dialog
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                // Get username if not fetched yet
+                                if (_username.isEmpty) {
+                                  await _fetchUsername();
+                                }
+
+                                // Add booking to Firestore using FirebaseService
+                                FirebaseService().addBookingToFirestore(
+                                  context,
+                                  _username,
+                                  widget.time,
+                                  widget.duration,
+                                  widget.airline,
+                                  widget.price,
+                                );
+
+                                // Close the dialog
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Confirm"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    print("User not authenticated.");
+                    // Handle user authentication issue
+                  }
                 },
                 child: Container(
                   padding:

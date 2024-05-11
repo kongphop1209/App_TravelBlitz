@@ -126,7 +126,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'Customize',
                                   style: TextStyle(
                                       fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -166,7 +167,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'Notifications',
                                   style: TextStyle(
                                       fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -213,7 +215,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'Coupon',
                                   style: TextStyle(
                                       fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -253,7 +256,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'Saved Locations',
                                   style: TextStyle(
                                       fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
