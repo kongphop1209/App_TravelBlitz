@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:traveling_app/auth_page/login_page.dart';
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
@@ -219,8 +220,10 @@ class _SettingPageState extends State<SettingPage> {
                               ),
                               SizedBox(
                                 width: 10.w,
+                
                               ),
                               Container(
+                                height: 20.w,
                                 child: GestureDetector(
                                   onTap: () {
                                     FirebaseAuth.instance.signOut();

@@ -21,6 +21,8 @@ class _MyTripPageState extends State<MyTripPage> {
             child: Column(
               children: [
                 Container(
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
                       Container(
