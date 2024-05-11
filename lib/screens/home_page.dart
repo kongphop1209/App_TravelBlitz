@@ -278,7 +278,10 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(left: 10.w),
+                                      margin: EdgeInsets.only(
+                                        left: 10.w,
+                                        top: 5.h,
+                                      ),
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10.w, vertical: 5.h),
                                       decoration: BoxDecoration(
