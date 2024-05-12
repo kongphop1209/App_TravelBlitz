@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CouponPage extends StatefulWidget {
@@ -15,16 +16,18 @@ class _CouponPageState extends State<CouponPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(241, 247, 255, 1),
       appBar: AppBar(
-        title: Row(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
-            ),
-            Text(
-              'Coupons and Deals',
-              style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700),
-            ),
-          ],
+        title: SingleChildScrollView(
+          child: Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+              ),
+              Text(
+                'Coupons and Deals',
+                style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_outlined),
@@ -87,6 +90,185 @@ class _CouponPageState extends State<CouponPage> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.w, 60.w, 0.w),
+                  child: Text(
+                    "Have a coupon or promotion code? Enter here to get extra discount!",
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/coupon1_pic.png'),
+                      SizedBox(width: 50.w),
+                      Column(
+                        children: [
+                          Text(
+                            '30% off Ticket',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            'Up to 3,000 bath',
+                            style: TextStyle(color: Color(0xff9C9A9A)),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/coupon2_pic.png'),
+                      SizedBox(width: 50.w),
+                      Column(
+                        children: [
+                          Text(
+                            '30% off Ticket',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            'Up to 3,000 bath',
+                            style: TextStyle(color: Color(0xff9C9A9A)),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/coupon3_pic.png'),
+                      SizedBox(width: 40.w),
+                      Column(
+                        children: [
+                          Text(
+                            'Flyer Exlcusive - up to 450 bath off Ticket',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          ),
+                          Text(
+                            'filght booking Phuket ',
+                            style: TextStyle(color: Color(0xff9C9A9A)),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 2,
+                height: MediaQuery.of(context).size.height * 0.11,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/coupon4_pic.png'),
+                      SizedBox(width: 40.w),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              'New flyers 15 % off ticket ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Text(
+                                'For 1st filght booking | for bangkok to chaing mai',
+                                style: TextStyle(
+                                  color: Color(0xff9C9A9A),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/images/coupon5_pic.png'),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              'up to 10,000 bath 75% off flight',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15.0),
+                            ),
+                            Text(
+                              'For 1st filght booking | for bangkok to Chaing-mai',
+                              style: TextStyle(
+                                  color: Color(0xff9C9A9A), fontSize: 10.0),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
