@@ -37,9 +37,9 @@ android {
     ndkVersion flutter.ndkVersion
 
     defaultConfig {
-    applicationId "com.example.traveling_app"
+    applicationId "com.blitz.traveling_app"
     minSdkVersion 23
-    targetSdkVersion 31
+    targetSdkVersion 33
     versionCode flutterVersionCode.toInteger()
     versionName flutterVersionName
 
