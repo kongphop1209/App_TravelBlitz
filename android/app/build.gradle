@@ -41,7 +41,7 @@ defaultConfig {
     minSdkVersion 23
     targetSdkVersion 33
     
-    versionCode flutterVersionCode.toInteger() + 1
+    versionCode flutterVersionCode.toInteger() + 3
     versionName flutterVersionName
 
 }
