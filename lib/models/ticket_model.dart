@@ -29,4 +29,18 @@ class FirebaseService {
       throw error;
     }
   }
+
+  Future<void> removeBookingFromFirestore(String userId) async {
+    try {
+      // Delete the booking document from the user's flight collection
+      await _firestore
+          .collection('user_flights_$userId')
+          .doc('booking')
+          .delete();
+      print('Booking removed successfully for user: $userId');
+    } catch (error) {
+      print('Failed to remove booking: $error');
+      throw error;
+    }
+  }
 }

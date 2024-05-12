@@ -14,6 +14,7 @@ class ResetPassword_Page extends StatefulWidget {
 
 class _ResetPassword_PageState extends State<ResetPassword_Page> {
   bool isSigningUp = false;
+  bool isLoading = false;
 
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _emailController = TextEditingController();
@@ -24,29 +25,39 @@ class _ResetPassword_PageState extends State<ResetPassword_Page> {
     super.dispose();
   }
 
-  Future ResetPassword_Section() async {
+  Future<void> ResetPassword_Section() async {
     try {
+      setState(() {
+        isLoading = true;
+      });
+
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailController.text.trim());
+
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(
-                  'Password reset link has been sent! Please check your email.'),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(
+                'Password reset link has been sent! Please check your email.'),
+          );
+        },
+      );
     } on FirebaseException catch (e) {
       print(e);
+
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(
-                e.message.toString(),
-              ),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -105,14 +116,15 @@ class _ResetPassword_PageState extends State<ResetPassword_Page> {
                     color: Color(0xFF007AFF),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    'Confirm',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.sp,
-                      letterSpacing: 2.2,
-                      fontWeight: FontWeight.bold,
+                  child: Center(
+                    child: Text(
+                      'Confirm',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        letterSpacing: 2.2,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

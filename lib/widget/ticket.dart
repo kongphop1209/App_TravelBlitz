@@ -64,6 +64,22 @@ class _TicketPreviewState extends State<TicketPreview> {
     }
   }
 
+  void _confirmBooking() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Booking confirmed successfully!'),
+      ),
+    );
+  }
+
+  void _cancelBooking() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Cancel Booking'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,6 +155,7 @@ class _TicketPreviewState extends State<TicketPreview> {
                               onPressed: () {
                                 // Close the dialog
                                 Navigator.of(context).pop();
+                                _cancelBooking();
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
@@ -174,6 +191,7 @@ class _TicketPreviewState extends State<TicketPreview> {
 
                                 // Close the dialog
                                 Navigator.of(context).pop();
+                                _confirmBooking();
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(

@@ -311,15 +311,43 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                    if (hasFlightData)
-                                      Column(
-                                        children: [
-                                          _buildFlightInfoItem('', duration),
-                                          _buildFlightInfoItem('', time),
-                                          _buildFlightInfoItem(
-                                              airline, '● Economy ● Direct'),
-                                        ],
-                                      ),
+                                    Center(
+                                      child: hasFlightData
+                                          ? Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 10
+                                                      .w), // Adjust left padding
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  _buildFlightInfoItem(
+                                                      'Duration', duration),
+                                                  _buildFlightInfoItem(
+                                                      'Time', time),
+                                                  _buildFlightInfoItem(airline,
+                                                      '● Economy ● Direct'),
+                                                ],
+                                              ),
+                                            )
+                                          : Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.03),
+                                              child: Text(
+                                                'No information',
+                                                style: TextStyle(
+                                                  fontSize: 15.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color.fromARGB(
+                                                      255, 218, 15, 0),
+                                                ),
+                                              ),
+                                            ),
+                                    ),
                                   ],
                                 ),
                               ),

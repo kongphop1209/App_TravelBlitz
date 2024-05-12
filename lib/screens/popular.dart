@@ -109,28 +109,42 @@ class _PopUpViewState extends State<PopUpView> {
               scrollDirection: Axis.horizontal,
               itemCount: 4,
               itemBuilder: (BuildContext context, int index) {
+                String assetImagePath;
+                String title;
+                String subtitle;
+
+                // Set assetImagePath, title, and subtitle based on index
+                switch (index) {
+                  case 0:
+                    assetImagePath = 'assets/images/krabi_pic.jpg';
+                    title = 'Krabi';
+                    subtitle = 'Southern Thailand';
+                    break;
+                  case 1:
+                    assetImagePath = 'assets/images/benchamabophit_temple.jpg';
+                    title = 'Benchamabophit';
+                    subtitle = 'Central Thailand';
+                    break;
+                  case 2:
+                    assetImagePath = 'assets/images/chinatown_pic.jpg';
+                    title = 'China Town';
+                    subtitle = 'Central Thailand';
+                    break;
+                  case 3:
+                    assetImagePath = 'assets/images/pattaya_pic.jpg';
+                    title = 'Pattaya';
+                    subtitle = 'South Central Thailand';
+                    break;
+                  default:
+                    assetImagePath = '';
+                    title = '';
+                    subtitle = '';
+                }
+
                 return PopularPageViewPop(
-                  assetImagePath: index == 0
-                      ? 'assets/images/krabi_pic.jpg'
-                      : index == 1
-                          ? 'assets/images/benchamabophit_temple.jpg'
-                          : index == 2
-                              ? 'assets/images/chinatown_pic.jpg'
-                              : 'assets/images/pattaya_pic.jpg',
-                  title: index == 0
-                      ? 'Krabi'
-                      : index == 1
-                          ? 'Benchamabophit'
-                          : index == 2
-                              ? 'China Town'
-                              : 'Pattaya',
-                  subtitle: index == 0
-                      ? 'Southern Thailand'
-                      : index == 1
-                          ? 'Central Thailand'
-                          : index == 2
-                              ? 'Central Thailand'
-                              : 'South Central Thailand',
+                  assetImagePath: assetImagePath,
+                  title: title,
+                  subtitle: subtitle,
                   margin: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.1,
                     top: MediaQuery.of(context).size.height * 0.2,

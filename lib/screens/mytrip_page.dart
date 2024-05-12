@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart'; // Import for date formatting
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:traveling_app/models/ticket_model.dart';
 import 'package:traveling_app/screens/setting_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
 
@@ -14,6 +15,7 @@ class MyTripPage extends StatefulWidget {
 }
 
 class _MyTripPageState extends State<MyTripPage> {
+  final FirebaseService _firebaseService = FirebaseService();
   late String airline = '';
   late String duration = '';
   late String price = '';
@@ -69,7 +71,6 @@ class _MyTripPageState extends State<MyTripPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Check if flight data is available (assuming non-empty airline as a check)
     bool hasFlightData = airline.isNotEmpty;
 
     return Scaffold(
@@ -82,8 +83,6 @@ class _MyTripPageState extends State<MyTripPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-
-                // User Info Section
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -150,10 +149,7 @@ class _MyTripPageState extends State<MyTripPage> {
                     ),
                   ],
                 ),
-
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-
-                // Flight Info Section
                 Text(
                   'Flight Details',
                   style: TextStyle(
@@ -162,46 +158,95 @@ class _MyTripPageState extends State<MyTripPage> {
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-
-                // Flight Info Section (Conditional Rendering)
-                if (hasFlightData)
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.h,
-                          horizontal: 10.w,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.blue,
-                              Color.fromARGB(255, 170, 245, 255),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: Column(
+                Container(
+                  child: hasFlightData
+                      ? Column(
                           children: [
-                            _buildFlightInfoItem('Airline', airline),
-                            _buildFlightInfoItem('Duration', duration),
-                            _buildFlightInfoItem('Price', price),
-                            _buildFlightInfoItem('Time', time),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.h,
+                                horizontal: 10.w,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.blue,
+                                    Color.fromARGB(255, 170, 245, 255),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  _buildFlightInfoItem('Airline', airline),
+                                  _buildFlightInfoItem('Duration', duration),
+                                  _buildFlightInfoItem('Price', price),
+                                  _buildFlightInfoItem('Time', time),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 224, 15, 0)),
+                              child: Text(''),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            Container(
+                              child: Center(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    _firebaseService
+                                        .removeBookingFromFirestore(
+                                      FirebaseAuth.instance.currentUser!.uid,
+                                    )
+                                        .then((_) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              'Flight removed successfully'),
+                                        ),
+                                      );
+                                    }).catchError((error) {
+                                      print('Error removing flight: $error');
+                                    });
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
+                                  ),
+                                  child: Text(
+                                    'Remove Flight',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
+                        )
+                      : Center(
+                          child: Text(
+                            'No flight yet',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 255, 63, 4),
+                            ),
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(color: Colors.amber),
-                        child: Text(''),
-                      ),
-                    ],
-                  ),
+                ),
               ],
             ),
           ),
