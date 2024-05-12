@@ -13,37 +13,28 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-
-
 android {
     namespace "com.example.traveling_app"
     testNamespace = "com.example.traveling_app_test"
-    compileSdk flutter.compileSdkVersion
+    compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     defaultConfig {
-    applicationId "com.blitz.traveling_app"
-    minSdkVersion 23
-    targetSdkVersion 33
-    versionCode flutterVersionCode.toInteger()
-    versionName flutterVersionName
-
-}
+        applicationId "com.blitz.traveling_app"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,23 +49,18 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-
-
     signingConfigs {
         release {
-        keyAlias keystoreProperties['keyAlias']
-        keyPassword keystoreProperties['keyPassword']
-        storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-        storePassword keystoreProperties['storePassword']
-}
-}
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
-         // TODO: Add your own signing config for the release build.
-         // Signing with the debug keys for now,
-         // so `flutter run --release` works.
-        signingConfig signingConfigs.debug
-        signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 }
