@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,17 +35,20 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _fetchFlightData() async {
     try {
-      DocumentSnapshot flightSnapshot = await FirebaseFirestore.instance
-          .collection('booking_1')
-          .doc('detail-flight')
-          .get();
+      final userId = FirebaseAuth.instance.currentUser?.uid;
+      if (userId != null) {
+        DocumentSnapshot flightSnapshot = await FirebaseFirestore.instance
+            .collection('user_flights_$userId')
+            .doc('booking')
+            .get();
 
-      setState(() {
-        airline = flightSnapshot['airline'] ?? '';
-        duration = flightSnapshot['duration'] ?? '';
-        price = flightSnapshot['price'] ?? '';
-        time = flightSnapshot['time'] ?? '';
-      });
+        setState(() {
+          airline = flightSnapshot['airline'] ?? '';
+          duration = flightSnapshot['duration'] ?? '';
+          price = flightSnapshot['price'] ?? '';
+          time = flightSnapshot['time'] ?? '';
+        });
+      }
     } catch (e) {
       print('Error fetching flight data: $e');
     }

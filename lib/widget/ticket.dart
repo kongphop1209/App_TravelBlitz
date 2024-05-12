@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:traveling_app/models/ticket_model.dart';
 
 class TicketPreview extends StatefulWidget {
@@ -67,21 +66,20 @@ class _TicketPreviewState extends State<TicketPreview> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSelected = false;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(5.0),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             widget.imagePath,
-            width: 60.w,
+            width: 60.0,
           ),
           Expanded(
             child: Column(
@@ -90,14 +88,14 @@ class _TicketPreviewState extends State<TicketPreview> {
                 Text(
                   widget.time,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: 13.0,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   widget.duration,
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 12.0,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
                   ),
@@ -105,7 +103,7 @@ class _TicketPreviewState extends State<TicketPreview> {
                 Text(
                   widget.airline,
                   style: TextStyle(
-                    fontSize: 11.sp,
+                    fontSize: 11.0,
                     fontWeight: FontWeight.w700,
                     color: const Color.fromARGB(255, 37, 37, 37),
                   ),
@@ -120,12 +118,12 @@ class _TicketPreviewState extends State<TicketPreview> {
                 widget.price,
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
-                  fontSize: 13.sp,
+                  fontSize: 13.0,
                 ),
               ),
               TextButton(
                 onPressed: () async {
-                  String? userId = FirebaseAuth.instance.currentUser?.uid;
+                  final userId = FirebaseAuth.instance.currentUser?.uid;
 
                   if (userId != null) {
                     showDialog(
@@ -144,11 +142,12 @@ class _TicketPreviewState extends State<TicketPreview> {
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 15.w, vertical: 5.h),
+                                    horizontal: 15.0, vertical: 5.0),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255)),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                ),
                                 child: Text(
                                   'Cancel',
                                   style: TextStyle(
@@ -166,8 +165,7 @@ class _TicketPreviewState extends State<TicketPreview> {
 
                                 // Add booking to Firestore using FirebaseService
                                 FirebaseService().addBookingToFirestore(
-                                  context,
-                                  _username,
+                                  userId,
                                   widget.time,
                                   widget.duration,
                                   widget.airline,
@@ -179,10 +177,11 @@ class _TicketPreviewState extends State<TicketPreview> {
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 15.w, vertical: 5.h),
+                                    horizontal: 15.0, vertical: 5.0),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.blue),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.blue,
+                                ),
                                 child: Text(
                                   'Confirm',
                                   style: TextStyle(color: Colors.white),
@@ -200,15 +199,15 @@ class _TicketPreviewState extends State<TicketPreview> {
                 },
                 child: Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0),
                     color: Colors.blue,
                   ),
                   child: Text(
                     'Book',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 14.0,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),
