@@ -3,7 +3,7 @@
 # Hope you enjoys :D 
 A new Flutter project.
 
-#Poicy of this app
+# Poicy of this app
 This app was created in order for users to have new experiences and try going to new places using our app.
 
 ## Getting Started
