@@ -3,11 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-<<<<<<< HEAD
-import 'package:responsive_builder/responsive_builder.dart';
-import 'package:traveling_app/auth_page/login_page.dart';
-=======
->>>>>>> 11b7f93d0a93b2f2eab9d0b9f3f7279da5d7474b
 import 'package:traveling_app/main_page.dart';
 import 'package:traveling_app/services/username_widget.dart';
 import 'package:traveling_app/user_auth/emailedit.dart';
@@ -202,42 +197,6 @@ class _SettingPageState extends State<SettingPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
-<<<<<<< HEAD
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Container(
-                    color: Color.fromARGB(255, 215, 225, 240),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 15.h),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.logout_outlined,
-                                color: Color.fromARGB(255, 255, 118, 108),
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                
-                              ),
-                              Container(
-                                height: 20.w,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    FirebaseAuth.instance.signOut();
-                                    Navigator.pushNamed(context, '/login');
-                                  },
-                                  child: Text(
-                                    'Sign Out',
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromARGB(255, 255, 118, 108),
-                                    ),
-                                  ),
-=======
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -271,7 +230,6 @@ class _SettingPageState extends State<SettingPage> {
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromARGB(255, 255, 118, 108),
->>>>>>> 11b7f93d0a93b2f2eab9d0b9f3f7279da5d7474b
                                 ),
                               ),
                             ),

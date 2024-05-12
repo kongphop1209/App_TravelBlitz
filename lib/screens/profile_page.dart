@@ -13,29 +13,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.55,
-               width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            UsernameShow(
-                              textStyle: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: const Color.fromARGB(255, 0, 0, 0),
-=======
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
@@ -58,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontWeight: FontWeight.w500,
                                   color: const Color.fromARGB(255, 0, 0, 0),
                                 ),
->>>>>>> 11b7f93d0a93b2f2eab9d0b9f3f7279da5d7474b
                               ),
                               Row(
                                 children: [
