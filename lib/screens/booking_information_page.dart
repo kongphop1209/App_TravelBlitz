@@ -48,14 +48,6 @@ class _BookingInformationState extends State<BookingInformation> {
     }
   }
 
-  void _confirmBooking() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Booking confirmed successfully!'),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     String todayDate = DateFormat('E, MMM d').format(DateTime.now());

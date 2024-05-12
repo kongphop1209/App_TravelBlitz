@@ -80,8 +80,9 @@ class _DisplayNamePageState extends State<DisplayNamePage> {
               child: ElevatedButton(
                 onPressed: _updateUsername,
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Color(0xFF007AFF),
+                  ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

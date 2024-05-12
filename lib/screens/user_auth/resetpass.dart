@@ -1,21 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/services/firebase_auth/firebase_auth_services.dart';
 import 'package:traveling_app/widget/container_widget.dart';
 
 class ResetPassword_Page extends StatefulWidget {
-  const ResetPassword_Page({super.key});
+  const ResetPassword_Page({Key? key}) : super(key: key);
 
   @override
   State<ResetPassword_Page> createState() => _ResetPassword_PageState();
 }
 
 class _ResetPassword_PageState extends State<ResetPassword_Page> {
-  bool isSigningUp = false;
   bool isLoading = false;
-
   final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _emailController = TextEditingController();
 
@@ -25,34 +22,29 @@ class _ResetPassword_PageState extends State<ResetPassword_Page> {
     super.dispose();
   }
 
-  Future<void> ResetPassword_Section() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
+  Future<void> resetPasswordSection() async {
+    setState(() {
+      isLoading = true;
+    });
 
+    try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailController.text.trim());
 
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(
-                'Password reset link has been sent! Please check your email.'),
-          );
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Password reset link has been sent! Check your email.'),
+          duration: Duration(seconds: 5),
+        ),
       );
-    } on FirebaseException catch (e) {
+    } on FirebaseAuthException catch (e) {
       print(e);
 
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message.toString()),
-          );
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message ?? 'An error occurred'),
+          duration: Duration(seconds: 3),
+        ),
       );
     } finally {
       setState(() {
@@ -62,62 +54,46 @@ class _ResetPassword_PageState extends State<ResetPassword_Page> {
   }
 
   String? _emailError;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset password'),
+        title: Text('Reset Password'),
       ),
       body: Container(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, top: 50.0, right: 30.0),
-          child: Column(
-            children: [
-              Text(
-                'Please enter Your email and wait for link reset password on your email.',
-                style: TextStyle(fontSize: 15, color: Color(0xFF3C3C43)),
+        padding: EdgeInsets.all(20.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Please enter your email to receive a password reset link.',
+              style: TextStyle(fontSize: 15.sp, color: Color(0xFF3C3C43)),
+            ),
+            SizedBox(height: 20.h),
+            TextFormField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                errorText: _emailError,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  errorText: _emailError,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            SizedBox(height: 20.h),
+            ElevatedButton(
+              onPressed: resetPasswordSection,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF007AFF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                keyboardType: TextInputType.text,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.005,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.08),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      _emailError ?? '',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: ResetPassword_Section,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF007AFF),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
                       'Confirm',
                       style: TextStyle(
                         color: Colors.white,
@@ -126,11 +102,11 @@ class _ResetPassword_PageState extends State<ResetPassword_Page> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
