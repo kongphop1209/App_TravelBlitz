@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:traveling_app/widget/popular_view.dart';
 
@@ -18,55 +17,11 @@ class _PopularPageState extends State<PopularPage> {
       backgroundColor: Color.fromRGBO(241, 247, 255, 1),
       body: Stack(
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                PopularPageViewPop(
-                  assetImagePath: 'assets/images/krabi_pic.jpg',
-                  title: 'Krabi',
-                  subtitle: 'Southern Thailand',
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    top: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                ),
-                PopularPageViewPop(
-                  assetImagePath: 'assets/images/benchamabophit_temple.jpg',
-                  title: 'Benchamabophit',
-                  subtitle: 'Central Thailand',
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    top: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                ),
-                PopularPageViewPop(
-                  assetImagePath: 'assets/images/chinatown_pic.jpg',
-                  title: 'China Town',
-                  titleColor: Colors.white,
-                  subtitleColor: Colors.white,
-                  subtitle: 'Central Thailand',
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    top: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                ),
-                PopularPageViewPop(
-                  assetImagePath: 'assets/images/pattaya_pic.jpg',
-                  title: 'Pattaya',
-                  titleColor: Colors.white,
-                  subtitleColor: Colors.white,
-                  subtitle: 'South Central Thailand',
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    top: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          PopUpView(),
+          UnderDestination(),
+          RecommendDestination(),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.1,
+            top: MediaQuery.of(context).size.height * 0.07,
             left: 0,
             right: 0,
             child: Row(
@@ -86,7 +41,7 @@ class _PopularPageState extends State<PopularPage> {
                     margin: EdgeInsets.symmetric(horizontal: 25.w),
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(202, 255, 255, 255),
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
@@ -103,7 +58,7 @@ class _PopularPageState extends State<PopularPage> {
                         hintText: 'Search',
                         hintStyle: TextStyle(
                           fontSize: 13.5.sp,
-                          color: Color.fromARGB(255, 143, 143, 143),
+                          color: Color.fromARGB(255, 73, 73, 73),
                           fontWeight: FontWeight.w500,
                         ),
                         border: InputBorder.none,
@@ -116,6 +71,166 @@ class _PopularPageState extends State<PopularPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// ========== Under here was the Widget ============///
+class PopUpView extends StatefulWidget {
+  const PopUpView({Key? key}) : super(key: key);
+
+  @override
+  State<PopUpView> createState() => _PopUpViewState();
+}
+
+class _PopUpViewState extends State<PopUpView> {
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Positioned(
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: MediaQuery.of(context).size.height * 0.4,
+        child: AnimatedBuilder(
+          animation: _pageController,
+          builder: (context, child) {
+            return PageView.builder(
+              controller: _pageController,
+              scrollDirection: Axis.horizontal,
+              itemCount: 4,
+              itemBuilder: (BuildContext context, int index) {
+                String assetImagePath;
+                String title;
+                String subtitle;
+
+                // Set assetImagePath, title, and subtitle based on index
+                switch (index) {
+                  case 0:
+                    assetImagePath = 'assets/images/krabi_pic.jpg';
+                    title = 'Krabi';
+                    subtitle = 'Southern Thailand';
+                    break;
+                  case 1:
+                    assetImagePath = 'assets/images/benchamabophit_temple.jpg';
+                    title = 'Benchamabophit';
+                    subtitle = 'Central Thailand';
+                    break;
+                  case 2:
+                    assetImagePath = 'assets/images/chinatown_pic.jpg';
+                    title = 'China Town';
+                    subtitle = 'Central Thailand';
+                    break;
+                  case 3:
+                    assetImagePath = 'assets/images/pattaya_pic.jpg';
+                    title = 'Pattaya';
+                    subtitle = 'South Central Thailand';
+                    break;
+                  default:
+                    assetImagePath = '';
+                    title = '';
+                    subtitle = '';
+                }
+
+                return PopularPageViewPop(
+                  assetImagePath: assetImagePath,
+                  title: title,
+                  subtitle: subtitle,
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    top: MediaQuery.of(context).size.height * 0.2,
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class UnderDestination extends StatelessWidget {
+  const UnderDestination({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Positioned(
+        bottom: MediaQuery.of(context).size.height * 0.33,
+        left: MediaQuery.of(context).size.width * 0.07,
+        right: 0,
+        child: Text(
+          'Popular Destination',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class RecommendDestination extends StatelessWidget {
+  const RecommendDestination({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Positioned(
+        bottom: MediaQuery.of(context).size.height * 0.13,
+        left: 0,
+        right: 0,
+        child: Container(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              margin: EdgeInsets.only(left: 20.w),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/bangkok.png',
+                    width: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  Image.asset(
+                    'assets/images/northern.png',
+                    width: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  Image.asset(
+                    'assets/images/western.png',
+                    width: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  Image.asset(
+                    'assets/images/southern.png',
+                    width: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

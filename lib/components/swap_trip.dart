@@ -31,6 +31,18 @@ class _OptionTextWidgetState extends State<OptionTextWidget> {
       lastDate: DateTime(2025).add(
         Duration(days: 365),
       ),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light().copyWith(
+              primary: Color.fromARGB(255, 0, 0, 0),
+              onPrimary: Color.fromARGB(255, 255, 255, 255),
+              surface: Color.fromARGB(255, 136, 251, 255),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (pickedDate != null) {
       setState(() {

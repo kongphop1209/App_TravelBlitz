@@ -1,66 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FirebaseService {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  void addBookingToFirestore(
-    BuildContext context,
-    String username,
+  Future<void> addBookingToFirestore(
+    String userId,
     String time,
     String duration,
     String airline,
     String price,
-  ) {
-    Map<String, dynamic> bookingData = {
-      'username': username,
-      'time': time,
-      'duration': duration,
-      'airline': airline,
-      'price': price,
-      'timestamp': FieldValue.serverTimestamp(),
-    };
+  ) async {
+    try {
+      // Generate a unique document ID for the booking
+      String bookingId = _firestore.collection('user_flights_$userId').doc().id;
 
-    FirebaseFirestore.instance
-        .collection('booking_1')
-        .add(bookingData)
-        .then((value) {
-      print('Booking added successfully!');
+      // Create a specific document with the generated ID in the user's flight collection
+      await _firestore.collection('user_flights_$userId').doc('booking').set({
+        'time': time,
+        'duration': duration,
+        'airline': airline,
+        'price': price,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Colors.white,
-            title: Text('Confirmation'),
-            content: Text(
-                'Your booking has been confirmed. Please check in your booking.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue,
-                  ),
-                  child: Text(
-                    'OK',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-      Navigator.of(context).pop();
-    }).catchError((error) {
+      print('Booking added successfully with ID: $userId');
+    } catch (error) {
       print('Failed to add booking: $error');
-    });
+      throw error;
+    }
+  }
+
+  Future<void> removeBookingFromFirestore(String userId) async {
+    try {
+      // Delete the booking document from the user's flight collection
+      await _firestore
+          .collection('user_flights_$userId')
+          .doc('booking')
+          .delete();
+      print('Booking removed successfully for user: $userId');
+    } catch (error) {
+      print('Failed to remove booking: $error');
+      throw error;
+    }
   }
 }

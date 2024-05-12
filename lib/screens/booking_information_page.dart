@@ -26,15 +26,34 @@ class _BookingInformationState extends State<BookingInformation> {
       context: context,
       initialDate: initialDate,
       firstDate: DateTime(2000),
-      lastDate: DateTime(2025).add(
-        const Duration(days: 365),
-      ),
+      lastDate: DateTime(2025).add(const Duration(days: 365)),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light().copyWith(
+              primary: Color.fromARGB(255, 0, 0, 0),
+              onPrimary: Color.fromARGB(255, 255, 255, 255),
+              surface: Color.fromARGB(255, 136, 251, 255),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
+
     if (pickedDate != null) {
       setState(() {
         selectedDate = pickedDate;
       });
     }
+  }
+
+  void _confirmBooking() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Booking confirmed successfully!'),
+      ),
+    );
   }
 
   @override
@@ -339,59 +358,65 @@ class _BookingInformationState extends State<BookingInformation> {
                 SizedBox(
                   height: 20.h,
                 ),
-                const TicketPreview(
-                    imagePath: "assets/images/nokair.png",
-                    time: '13:30  - - - - -  14:50',
-                    duration: 'CEI   1h 20m   BKK',
-                    airline: 'Nok Air',
-                    price: '฿ 1,815'),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const TicketPreview(
-                    imagePath: "assets/images/vietjet.png",
-                    time: '16:15  - - - - -  17:45',
-                    duration: 'CEI   1h 30m   BKK',
-                    airline: 'Thai Vietjet Air',
-                    price: '฿ 1,665'),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const TicketPreview(
-                    imagePath: "assets/images/airasia.png",
-                    time: '20:25  - - - - -  21:50',
-                    duration: 'CEI   1h 25m   BKK',
-                    airline: 'Thai Airasia',
-                    price: '฿ 1,531'),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const TicketPreview(
-                    imagePath: "assets/images/vietjet.png",
-                    time: '19:55  - - - - -  21:25',
-                    duration: 'CEI   1h 30m   BKK',
-                    airline: 'Thai Vietjet Air',
-                    price: '฿ 1,595'),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const TicketPreview(
-                    imagePath: "assets/images/airasia.png",
-                    time: '20:55  - - - - -  22:20',
-                    duration: 'CEI   1h 25m   BKK',
-                    airline: 'Thai Airasia',
-                    price: '฿ 1,632'),
-                SizedBox(
-                  height: 10.h,
-                ),
-                const TicketPreview(
-                    imagePath: "assets/images/nokair.png",
-                    time: '14:55  - - - - -  16:15',
-                    duration: 'CEI   1h 20m   BKK',
-                    airline: 'Nok Air',
-                    price: '฿ 1,791'),
-                SizedBox(
-                  height: 10.h,
+                Container(
+                  child: Column(
+                    children: [
+                      const TicketPreview(
+                          imagePath: "assets/images/nokair.png",
+                          time: '13:30  - - - - -  14:50',
+                          duration: 'CEI   1h 20m   BKK',
+                          airline: 'Nok Air',
+                          price: '฿ 1,815'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const TicketPreview(
+                          imagePath: "assets/images/vietjet.png",
+                          time: '16:15  - - - - -  17:45',
+                          duration: 'CEI   1h 30m   BKK',
+                          airline: 'Thai Vietjet Air',
+                          price: '฿ 1,665'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const TicketPreview(
+                          imagePath: "assets/images/airasia.png",
+                          time: '20:25  - - - - -  21:50',
+                          duration: 'CEI   1h 25m   BKK',
+                          airline: 'Thai Airasia',
+                          price: '฿ 1,531'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const TicketPreview(
+                          imagePath: "assets/images/vietjet.png",
+                          time: '19:55  - - - - -  21:25',
+                          duration: 'CEI   1h 30m   BKK',
+                          airline: 'Thai Vietjet Air',
+                          price: '฿ 1,595'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const TicketPreview(
+                          imagePath: "assets/images/airasia.png",
+                          time: '20:55  - - - - -  22:20',
+                          duration: 'CEI   1h 25m   BKK',
+                          airline: 'Thai Airasia',
+                          price: '฿ 1,632'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      const TicketPreview(
+                          imagePath: "assets/images/nokair.png",
+                          time: '14:55  - - - - -  16:15',
+                          duration: 'CEI   1h 20m   BKK',
+                          airline: 'Nok Air',
+                          price: '฿ 1,791'),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

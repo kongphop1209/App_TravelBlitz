@@ -21,7 +21,10 @@ class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   Future<void> _createUserProfile(
-      String userId, String username, String email) async {
+    String userId,
+    String username,
+    String email,
+  ) async {
     try {
       // Reference to the 'users' collection in Firebase Firestore
       CollectionReference usersRef =
@@ -31,11 +34,17 @@ class _RegisterPageState extends State<RegisterPage> {
       await usersRef.doc(userId).set({
         'username': username,
         'email': email,
-        'password': ''
+        'password': '',
         // Add additional fields as needed
       });
 
-      print('User profile created in Firestore');
+      // Create a new collection for flights specific to this user
+      CollectionReference userFlightsRef =
+          FirebaseFirestore.instance.collection('user_flights_$userId');
+
+      // Example of adding a flight document
+
+      print('User profile created in Firestore with flight collection');
     } catch (e) {
       print("Error creating user profile: $e");
     }

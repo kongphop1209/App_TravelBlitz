@@ -200,7 +200,7 @@ class _CouponPageState extends State<CouponPage> {
                 height: 10.h,
               ),
               Container(
-                width: MediaQuery.of(context).size.width*2,
+                width: MediaQuery.of(context).size.width * 2,
                 height: MediaQuery.of(context).size.height * 0.11,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -221,10 +221,12 @@ class _CouponPageState extends State<CouponPage> {
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 20.0)
-                              ,child: Text(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Text(
                                 'For 1st filght booking | for bangkok to chaing mai',
-                                style: TextStyle(color: Color(0xff9C9A9A),),
+                                style: TextStyle(
+                                  color: Color(0xff9C9A9A),
+                                ),
                               ),
                             ),
                           ],
@@ -259,7 +261,8 @@ class _CouponPageState extends State<CouponPage> {
                             ),
                             Text(
                               'For 1st filght booking | for bangkok to Chaing-mai',
-                              style: TextStyle(color: Color(0xff9C9A9A),fontSize: 10.0),
+                              style: TextStyle(
+                                  color: Color(0xff9C9A9A), fontSize: 10.0),
                             )
                           ],
                         ),
