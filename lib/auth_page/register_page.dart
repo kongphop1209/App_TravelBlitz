@@ -349,7 +349,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool _isEmailValid(String email) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(email);
+    final englishRegex = RegExp(r'^[a-zA-Z0-9@.]+$');
+    return emailRegex.hasMatch(email) && englishRegex.hasMatch(email);
   }
 
   bool _isUsernameValid(String username) {
@@ -358,8 +359,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   bool _isPasswordValid(String password) {
-    // Password should have at least 8 characters, including 1 uppercase letter and 4 digits
-    final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*\d{4}).{8,}$');
-    return passwordRegex.hasMatch(password);
+    final englishRegex = RegExp(r'^[a-zA-Z0-9]+$');
+    return password.length >= 6 && englishRegex.hasMatch(password);
   }
 }

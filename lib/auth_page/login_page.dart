@@ -345,15 +345,12 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isEmailValid(String email) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(email);
+    final englishRegex = RegExp(r'^[a-zA-Z0-9@.]+$');
+    return emailRegex.hasMatch(email) && englishRegex.hasMatch(email);
   }
 
   bool _isPasswordValid(String password) {
-    return password.length >= 6;
+    final englishRegex = RegExp(r'^[a-zA-Z0-9]+$');
+    return password.length >= 6 && englishRegex.hasMatch(password);
   }
-}
-
-bool _isEmailValid(String email) {
-  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  return emailRegex.hasMatch(email);
 }

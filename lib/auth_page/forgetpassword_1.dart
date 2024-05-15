@@ -185,4 +185,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       ),
     );
   }
+
+  bool _isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final englishRegex = RegExp(r'^[a-zA-Z0-9@.]+$');
+    return emailRegex.hasMatch(email) && englishRegex.hasMatch(email);
+  }
 }
