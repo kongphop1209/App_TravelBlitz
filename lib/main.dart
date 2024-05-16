@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveling_app/auth_page/forgetpassword_1.dart';
-
 import 'package:traveling_app/intro_firstin/screens/introscreen.dart';
 import 'package:traveling_app/screens/home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,16 +23,28 @@ void main() async {
         messagingSenderId: '125918499055',
         projectId: 'base-ddced'),
   );
+
   try {
     await FirebaseAppCheck.instance.activate();
   } catch (e) {
     print('Error activating Firebase App Check: $e');
   }
 
-  runApp(MyApp());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+
+  if (isFirstTime) {
+    prefs.setBool('isFirstTime', false);
+  }
+
+  runApp(MyApp(isFirstTime: isFirstTime));
 }
 
 class MyApp extends StatelessWidget {
+  final bool isFirstTime;
+
+  const MyApp({Key? key, required this.isFirstTime}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -44,7 +56,7 @@ class MyApp extends StatelessWidget {
           '/register': (context) => const RegisterPage(),
           '/forgetpass': (context) => const ForgetPassword(),
         },
-        home: const IntroScreen(),
+        home: isFirstTime ? const IntroScreen() : const LoginPage(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
       ),
